@@ -6,6 +6,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/* To do list
+Be able to use the left and right motors to shoot the ball
+Be able to move the hopper based on beam break sensors to automatically move other balls into position
+*/
+
 public class ShootCargo_AutoHopper extends CommandBase {
   /** Creates a new ShootCargoAndAutoHopper. */
   public ShootCargo_AutoHopper() {

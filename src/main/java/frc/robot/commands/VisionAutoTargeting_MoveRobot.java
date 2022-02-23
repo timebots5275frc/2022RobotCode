@@ -6,6 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/* To-do list
+Be able to rotate the robot with the Drivetrain to point toward the reflective tape.
+Be abe to get the x and y coordianates and the size of reflective tape
+Possibly get the number for the shooter speed
+*/
+
 public class VisionAutoTargeting_MoveRobot extends CommandBase {
   /** Creates a new VisionAutoTargetingMoveRobot. */
   public VisionAutoTargeting_MoveRobot() {
