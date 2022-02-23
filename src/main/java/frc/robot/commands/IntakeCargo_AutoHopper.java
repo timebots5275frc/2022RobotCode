@@ -6,12 +6,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+
+/** 
+ * Command Procedure 
+ * Button For Intaking Cargo
+ * Start IntakeCargo_AutoHopper Command
+ *   1. Start Intake Motor
+ *   2. If both hopper positions are empty → move both hopper motors
+ *   3. If ball in hopper position 2 → move new ball to hooper position 1
+ *   4. If a ball is in both positions → the intake motor will be disabled.
+ */
 public class IntakeCargo_AutoHopper extends CommandBase {
   /** Creates a new IntakeCargoAutoHopper. */
+
   public IntakeCargo_AutoHopper() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
-
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
