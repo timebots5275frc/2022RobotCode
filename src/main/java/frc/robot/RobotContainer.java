@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.climber.Climber;
+import frc.robot.subsystems.drivetrain.Drivetrain;
+import frc.robot.subsystems.hopper.Hopper;
+import frc.robot.subsystems.shooter.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -16,8 +19,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // The robot's subsystems and commands are defined here.
+  public Drivetrain drivetrain = new Drivetrain();
+  public Climber climber = new Climber();
+  public Shooter shooter = new Shooter();
+  public Hopper hopper = new Hopper();
+  // intake
+  // vision
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
