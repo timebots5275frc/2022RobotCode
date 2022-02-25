@@ -44,9 +44,6 @@ public class Drivetrain extends SubsystemBase {
 
   private final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(kinematics, this.getHeading());
 
-  // TODO: Find out if we still need this. -Lucas 
-  // private double autoTurnOffsetRadians = 0;
-
   public Drivetrain() {
     System.out.println("DriveTrain (:");
   }
@@ -144,7 +141,6 @@ public class Drivetrain extends SubsystemBase {
    */
   public Rotation2d getHeading() {
     return imuADIS16470.getRotation2d(); // TODO Lucas //.minus(new Rotation2d(this.autoTurnOffsetRadians)); // radians
-
   }
 
   /**
@@ -175,6 +171,9 @@ public class Drivetrain extends SubsystemBase {
 /**
  * ! We might need this for the Auto. -Lucas 
  * 
+  // TODO: Find out if we still need this. -Lucas 
+  // private double autoTurnOffsetRadians = 0;
+
  * 
  * public void setAutoTurnOffsetRadians(double angleInRadians) { // TODO -Lucas
     System.out.println("angleInRadians = " + angleInRadians);

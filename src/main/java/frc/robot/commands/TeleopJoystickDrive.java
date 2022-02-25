@@ -4,7 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.constants.Constants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 /* To do list
@@ -15,9 +19,28 @@ public class TeleopJoystickDrive extends CommandBase {
   /** Creates a new TeleopJoystickDrive. */
   public Drivetrain drivetrain;
 
-  public TeleopJoystickDrive(Drivetrain _subsystem) {
+  private Joystick driveStick;
+  private Joystick auxStick;
+  private boolean fieldRelative;
+  
+  // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
+  private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(1);
+
+  /**
+   * Creates a new DefaultDrive.
+   *
+   * @param subsystem The drive subsystem this command wil run on.
+   * @param joystick  The control input for driving
+   */
+  public TeleopJoystickDrive(Drivetrain _subsystem, Joystick _driveStick, Joystick _auxstick, boolean _fieldRelative) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrain = _subsystem;
+    this.driveStick = _driveStick;
+    this.auxStick = _auxstick;
+    this.fieldRelative = _fieldRelative;
+
     addRequirements(_subsystem);
   }
 
@@ -27,7 +50,69 @@ public class TeleopJoystickDrive extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+// System.out.println(" JoystickDrive Running");
+
+    // if (driveStick.getRawButtonPressed(12)) {
+    //   driveTrain.resetADIS16470();
+    //   System.out.println("m_drive.imu.reset();");
+    // }
+
+    // if (driveStick.getRawButtonPressed(10)) {
+    //   System.out.println("m_drive.m_odometry.resetPosition");
+    //   driveTrain.resetOdometry();
+    //   // driveTrain.m_odometry.resetPosition( new Pose2d(), new Rotation2d(0) );
+    // }
+
+    double xSpeed = this.smartJoystick(driveStick.getY() * -1, Constants.ControllerConstants.DEADZONE_DRIVE)
+        * Constants.DriveConstants.MAX_DRIVE_SPEED;
+
+    double ySpeed = this.smartJoystick(driveStick.getX() * -1, Constants.ControllerConstants.DEADZONE_DRIVE)
+        * Constants.DriveConstants.MAX_DRIVE_SPEED;
+
+    double rotRate = this.smartJoystick(driveStick.getTwist() * -1, Constants.ControllerConstants.DEADZONE_STEER)
+        * Constants.DriveConstants.MAX_TWIST_RATE;
+
+    double throttle = (-driveStick.getThrottle() + 1) / 2; // between 0 and 1 = 0% and 100%
+
+    xSpeed *= throttle;
+    ySpeed *= throttle;
+    rotRate *= throttle;
+    // rotRate *= 0;
+
+    SmartDashboard.putNumber("throttle", throttle);
+
+    SmartDashboard.putNumber("xSpeed", driveStick.getY());
+    SmartDashboard.putNumber("ySpeed", driveStick.getX());
+    SmartDashboard.putNumber("rotRate", driveStick.getTwist());
+
+    SmartDashboard.putNumber("smart xSpeed", xSpeed);
+    SmartDashboard.putNumber("smart ySpeed", ySpeed);
+    SmartDashboard.putNumber("smart rotRate", rotRate);
+
+    drivetrain.drive(xSpeed, ySpeed, rotRate, fieldRelative);
+
+  }
+
+  
+  /**
+   * 
+   * @param _in
+   * @param deadZoneSize between -1 and 1
+   * @return
+   */
+  public double smartJoystick(double _in, double deadZoneSize) {
+    if (Math.abs(_in) < deadZoneSize) {
+      return 0;
+    }
+
+    if (_in > 0) {
+      return (_in - deadZoneSize) / (1 - deadZoneSize);
+    } else if (_in < 0) {
+      return (_in + deadZoneSize) / (1 - deadZoneSize);
+    }
+    return 0;
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -37,5 +122,9 @@ public class TeleopJoystickDrive extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public void setFieldRelative(boolean bool) {
+    this.fieldRelative = bool;
   }
 }

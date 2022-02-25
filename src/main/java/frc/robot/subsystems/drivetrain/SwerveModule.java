@@ -64,7 +64,6 @@ public class SwerveModule {
 
     /**
      * Returns the current state of the module.
-     *
      * @return The current state of the module.
      */
     public SwerveModuleState getState() {
