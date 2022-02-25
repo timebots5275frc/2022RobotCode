@@ -37,17 +37,24 @@ public class RobotContainer {
   public Shooter shooter = new Shooter();
   public Vision vision = new Vision();
   
-  // Commands
+  // Autonomous Commands
   public AutonomousDrive autonomousDrive = new AutonomousDrive();
   public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
-  public IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper();
-  public ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper();
-  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain);
+  
+  // Multi Subsystem Commands
+  public IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
+  public ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
   public VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
+
+  // Single Subsystem Commands
+  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain);
+
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
+    drivetrain.setDefaultCommand(teleopJoystickDrive);
+
     configureButtonBindings();
   }
 
