@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousDrive;
@@ -38,16 +39,18 @@ public class RobotContainer {
   public Vision vision = new Vision();
   
   // Autonomous Commands
-  public AutonomousDrive autonomousDrive = new AutonomousDrive();
-  public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
+  private AutonomousDrive autonomousDrive = new AutonomousDrive();
+  private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
   
   // Multi Subsystem Commands
-  public IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
-  public ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
-  public VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
+  private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
+  private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
+  private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
+  private Joystick drivestick = new Joystick(0);
+  private Joystick auxstick = new Joystick(1);
   // Single Subsystem Commands
-  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain);
+  private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, drivestick, auxstick);
 
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
