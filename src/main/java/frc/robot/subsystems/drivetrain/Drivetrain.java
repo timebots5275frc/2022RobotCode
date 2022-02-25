@@ -37,7 +37,7 @@ public class Drivetrain extends SubsystemBase {
 
   // private final AnalogGyro m_gyro = new AnalogGyro(0);
 
-  public final gyroWrapper imuADIS16470 = new gyroWrapper();
+  public final GyroWrapperADIS16470_IMU imuADIS16470 = new GyroWrapperADIS16470_IMU();
 
   public final SwerveDriveKinematics kinematics = new SwerveDriveKinematics(leftFrontWheelLoc, rightFrontWheelLoc,
       rightRearWheelLoc, leftRearWheelLoc);
