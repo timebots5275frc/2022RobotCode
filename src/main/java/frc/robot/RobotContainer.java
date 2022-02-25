@@ -42,7 +42,7 @@ public class RobotContainer {
   public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
   public IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper();
   public ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper();
-  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive();
+  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain);
   public VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

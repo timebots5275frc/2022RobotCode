@@ -13,10 +13,12 @@ Be able to drive with the joystick in the teleop period
 
 public class TeleopJoystickDrive extends CommandBase {
   /** Creates a new TeleopJoystickDrive. */
-  public Drivetrain subsystem;
+  public Drivetrain drivetrain;
 
-  public TeleopJoystickDrive(Drivetrain subsystem) {
+  public TeleopJoystickDrive(Drivetrain _subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.drivetrain = _subsystem;
+    addRequirements(_subsystem);
   }
 
   // Called when the command is initially scheduled.
