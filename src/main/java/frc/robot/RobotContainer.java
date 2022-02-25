@@ -47,10 +47,10 @@ public class RobotContainer {
   private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
   private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
-  private Joystick drivestick = new Joystick(0);
-  private Joystick auxstick = new Joystick(1);
+  private Joystick driveStick = new Joystick(0);
+  private Joystick auxStick = new Joystick(1);
   // Single Subsystem Commands
-  private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, drivestick, auxstick);
+  private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, true);
 
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
