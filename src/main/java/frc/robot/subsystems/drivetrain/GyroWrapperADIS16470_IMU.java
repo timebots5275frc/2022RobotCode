@@ -6,9 +6,3 @@ public class GyroWrapperADIS16470_IMU extends ADIS16470_IMU implements Gyro{
     
 }
 
-
-/**
- * public class gyroWrapper extends ADIS16470_IMU implements Gyro{
-    
-}
- */
