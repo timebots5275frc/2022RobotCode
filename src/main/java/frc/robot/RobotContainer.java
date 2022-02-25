@@ -6,11 +6,19 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.AutonomousDrive;
+import frc.robot.commands.AutonomousShootCargo;
+import frc.robot.commands.IntakeCargo_AutoHopper;
+import frc.robot.commands.ShootCargo_AutoHopper;
+import frc.robot.commands.TeleopJoystickDrive;
+import frc.robot.commands.VisionAutoTargeting_MoveRobot;
 import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.hopper.Hopper;
+import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
-import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.vision.Vision;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,13 +28,23 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here.
+  
+  // Subsystems
   public Drivetrain drivetrain = new Drivetrain();
   public Climber climber = new Climber();
-  public Shooter shooter = new Shooter();
+  public Intake intake = new Intake();
   public Hopper hopper = new Hopper();
-  // intake
-  // vision
-
+  public Shooter shooter = new Shooter();
+  public Vision vision = new Vision();
+  
+  // Commands
+  public AutonomousDrive autonomousDrive = new AutonomousDrive();
+  public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
+  public IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper();
+  public ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper();
+  public TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive();
+  public VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
