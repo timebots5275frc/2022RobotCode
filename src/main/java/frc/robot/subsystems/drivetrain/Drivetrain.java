@@ -4,11 +4,6 @@
 
 package frc.robot.subsystems.drivetrain;
 
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -16,12 +11,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants.DriveConstants;
 
@@ -115,7 +105,6 @@ public class Drivetrain extends SubsystemBase {
   public void updateOdometry() {
     m_odometry.update(this.getHeading(), leftFrontSwerveModule.getState(), rightFrontSwerveModule.getState(),
         rightRearSwerveModule.getState(), leftRearSwerveModule.getState());
-
   }
 
   /**
@@ -124,20 +113,6 @@ public class Drivetrain extends SubsystemBase {
   public void resetOdometry() {
     System.out.println("resetOdometry");
     m_odometry.resetPosition(new Pose2d(), new Rotation2d(0));
-  }
-
-  protected static Trajectory loadTrajectory(String trajectoryName) throws IOException {
-    return TrajectoryUtil.fromPathweaverJson(
-        Filesystem.getDeployDirectory().toPath().resolve(Paths.get("output", trajectoryName + ".wpilib.json")));
-  }
-
-  public Trajectory loadTrajectoryFromFile(String filename) {
-    try {
-      return loadTrajectory(filename);
-    } catch (IOException e) {
-      DriverStation.reportError("Failed to load auto trajectory: " + filename, false);
-      return new Trajectory();
-    }
   }
 
   /**
@@ -172,11 +147,6 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  public void setAutoTurnOffsetRadians(double angleInRadians) {
-    System.out.println("angleInRadians = " + angleInRadians);
-    // this.autoTurnOffsetRadians = angleInRadians; // TODO -Lucas
-  }
-
   /**
    * Sets the swerve ModuleStates.
    *
@@ -200,8 +170,34 @@ public class Drivetrain extends SubsystemBase {
     leftRearSwerveModule.setDesiredState(desiredStates, false);
   }
 
+
+
 /**
  * ! We might need this for the Auto. -Lucas 
+ * 
+ * 
+ * public void setAutoTurnOffsetRadians(double angleInRadians) { // TODO -Lucas
+    System.out.println("angleInRadians = " + angleInRadians);
+    this.autoTurnOffsetRadians = angleInRadians; 
+  }
+ * 
+ * 
+  protected static Trajectory loadTrajectory(String trajectoryName) throws IOException {
+    return TrajectoryUtil.fromPathweaverJson(
+        Filesystem.getDeployDirectory().toPath().resolve(Paths.get("output", trajectoryName + ".wpilib.json")));
+  }
+
+  public Trajectory loadTrajectoryFromFile(String filename) {
+    try {
+      return loadTrajectory(filename);
+    } catch (IOException e) {
+      DriverStation.reportError("Failed to load auto trajectory: " + filename, false);
+      return new Trajectory();
+    }
+  }
+ * 
+ * 
+ * 
   public static Trajectory generateTrajectory(TrajectoryConfig config, Pose2d startingPose2d,
       List<Translation2d> list) {
     // Pose2d offset = new Pose2d(startingPose2d.getX(), startingPose2d.getY(),
