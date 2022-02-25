@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.drivetrain.Drivetrain;
 
 /* To do list
 Be able to drive with the joystick in the teleop period
@@ -12,7 +13,9 @@ Be able to drive with the joystick in the teleop period
 
 public class TeleopJoystickDrive extends CommandBase {
   /** Creates a new TeleopJoystickDrive. */
-  public TeleopJoystickDrive() {
+  public Drivetrain subsystem;
+
+  public TeleopJoystickDrive(Drivetrain subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
