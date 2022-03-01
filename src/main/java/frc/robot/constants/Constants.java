@@ -40,7 +40,6 @@ public class Constants {
         // There are the CANBus IDs of the SparkMax controllers
         public static final int LEFT_FRONT_DRIVE_MOTOR_ID = 1;
         public static final int LEFT_FRONT_STEER_MOTOR_ID = 2;
-    
         public static final int RIGHT_FRONT_DRIVE_MOTOR_ID = 3;
         public static final int RIGHT_FRONT_STEER_MOTOR_ID = 4;
         public static final int LEFT_REAR_DRIVE_MOTOR_ID = 5;
@@ -136,21 +135,21 @@ public class Constants {
     }
 
     public static final class ClimberConstants {
-        public static final double LEFT_CLIMBER_MOTOR_MAX_RPM = null;
+        /*public static final double LEFT_CLIMBER_MOTOR_MAX_RPM = null;
         public static final double RIGHT_CLIMBER_MOTOR_MAX_RPM = null;
         public static final double ROTATING_CLIMBER_MOTOR_MAX_RPM = null;
         public static final int LEFT_CLIMBER_MOTOR_ID = null;
         public static final int RIGHT_CLIMBER_MOTOR_ID = null;
         public static final int ROTATING_CLIMBER_MOTOR_ID = null;
-
+        */
     }
 
     /**
      * @Title HopperConstants
      */
     public static final class HopperConstants {
-        public static final int LOWER_HOPPER_MOTOR_ID = null;
-        public static final int UPPER_HOPPER_MOTOR_ID = null;
+        //public static final int LOWER_HOPPER_MOTOR_ID = null;
+        //public static final int UPPER_HOPPER_MOTOR_ID = null;
         public static final double HOPPER_FIRE_SPEED = 0.4;
         public static final double HOPPER_BACK_SPEED = -0.4;
         public static final double HOPPER_DEFAULT_SPEED = 0.2;
