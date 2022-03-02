@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    System.out.println(timeBotsRobotContainer.drivetrain.getHeading());
+    // System.out.println(timeBotsRobotContainer.drivetrain.getHeading());
   }
 
   @Override

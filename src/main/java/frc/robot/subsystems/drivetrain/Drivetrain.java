@@ -136,16 +136,21 @@ public class Drivetrain extends SubsystemBase {
 
   /**
    * Returns the heading of the robot.
-   *
-   * @return the robot's heading in degrees, from -180 to 180
+   * @return the robot's heading in degrees, from -180 to 180. // ! This comment was from last year.
    */
   public Rotation2d getHeading() {
-    return imuADIS16470.getRotation2d(); // TODO Lucas //.minus(new Rotation2d(this.autoTurnOffsetRadians)); // radians
+
+    Rotation2d heading = new Rotation2d().fromDegrees(imuADIS16470.getYComplementaryAngle());
+
+    // System.out.println( "getYComplementaryAngle = " + heading );
+    // System.out.println( "getXComplementaryAngle = " + imuADIS16470.getXComplementaryAngle() );
+  
+    return heading; // TODO Lucas //.minus(new Rotation2d(this.autoTurnOffsetRadians)); // radians
+  
   }
 
   /**
    * Sets the swerve ModuleStates.
-   *
    * @param desiredStates The desired SwerveModule states.
    */
   public void setModuleStates(SwerveModuleState[] desiredStates) {
