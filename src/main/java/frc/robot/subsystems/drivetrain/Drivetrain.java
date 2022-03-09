@@ -142,7 +142,7 @@ public class Drivetrain extends SubsystemBase {
      */
     public Rotation2d getHeading() {
 
-        Rotation2d heading = new Rotation2d().fromDegrees(imuADIS16470.getYComplementaryAngle());
+        Rotation2d heading = Rotation2d.fromDegrees(imuADIS16470.getYComplementaryAngle());
 
         // System.out.println( "getYComplementaryAngle = " + heading );
         // System.out.println( "getXComplementaryAngle = " +
