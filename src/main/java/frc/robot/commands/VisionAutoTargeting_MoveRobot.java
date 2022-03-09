@@ -13,26 +13,29 @@ Possibly get the number for the shooter speed
 */
 
 public class VisionAutoTargeting_MoveRobot extends CommandBase {
-  /** Creates a new VisionAutoTargetingMoveRobot. */
-  public VisionAutoTargeting_MoveRobot() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    /** Creates a new VisionAutoTargetingMoveRobot. */
+    public VisionAutoTargeting_MoveRobot() {
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

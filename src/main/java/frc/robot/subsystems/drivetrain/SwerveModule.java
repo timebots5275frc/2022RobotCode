@@ -13,13 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.sensors.*;
 import frc.robot.constants.Constants.DriveConstants;
 
-
 public class SwerveModule {
-    
+
     public CANSparkMax driveMotor;
     private CANSparkMax steerMotor;
     private RelativeEncoder driveNEOMotorEncoder; // NEO build-in Encoder
-    
+
     private CANCoder steerAngleEncoder;
 
     private PIDController steerAnglePID;
@@ -64,6 +63,7 @@ public class SwerveModule {
 
     /**
      * Returns the current state of the module.
+     * 
      * @return The current state of the module.
      */
     public SwerveModuleState getState() {
@@ -88,7 +88,6 @@ public class SwerveModule {
         // The output of the steerAnglePID becomes the steer motor rpm reference.
         double steerMotorRpm = steerAnglePID.calculate(steerAngleEncoder.getAbsolutePosition(),
                 state.angle.getDegrees());
-
 
         if (logit) {
             SmartDashboard.putNumber("Drive OutputCurrent", driveMotor.getOutputCurrent());

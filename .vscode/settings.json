@@ -1,96 +1,99 @@
 {
-  
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.server.launchMode": "Standard",
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "bin/": true,
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true,
-    "**/*~": true
-  },
-  "java.test.config": [
-    {
-      "name": "WPIlibUnitTests",
-      "workingDirectory": "${workspaceFolder}/build/jni/release",
-      "vmargs": [ "-Djava.library.path=${workspaceFolder}/build/jni/release" ],
-      "env": {
-        "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release" ,
-        "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
-      }
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.server.launchMode": "Standard",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "bin/": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true,
+        "**/*~": true
     },
-  ],
-  "java.test.defaultConfig": "WPIlibUnitTests",
-
-  "better-comments.tags": [
-    // {
-    //   "tag": "hello",
-    //   "color": "#f6b436",
-    //   "strikethrough": false,
-    //   "underline": false,
-    //   "backgroundColor": "transparent",
-    //   "bold": true,
-    //   "italic": false
-    // },
-    // {
-    //   "tag": "^^",
-    //   "color": "#1EFF29",
-    //   "strikethrough": false,
-    //   "underline": false,
-    //   "backgroundColor": "transparent",
-    //   "bold": true,
-    //   "italic": false
-    // },
-    {
-      "tag": "!",
-      "color": "#FF2D00",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "?",
-      "color": "#3498DB",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "//",
-      "color": "#474747",
-      "strikethrough": true,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "todo",
-      "color": "#FF8C00",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "*",
-      "color": "#98C379",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    }
-  ]
+    "java.test.config": [
+        {
+            "name": "WPIlibUnitTests",
+            "workingDirectory": "${workspaceFolder}/build/jni/release",
+            "vmargs": [
+                "-Djava.library.path=${workspaceFolder}/build/jni/release"
+            ],
+            "env": {
+                "LD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release",
+                "DYLD_LIBRARY_PATH": "${workspaceFolder}/build/jni/release"
+            }
+        },
+    ],
+    "java.test.defaultConfig": "WPIlibUnitTests",
+    "better-comments.tags": [
+        // {
+        //   "tag": "hello",
+        //   "color": "#f6b436",
+        //   "strikethrough": false,
+        //   "underline": false,
+        //   "backgroundColor": "transparent",
+        //   "bold": true,
+        //   "italic": false
+        // },
+        // {
+        //   "tag": "^^",
+        //   "color": "#1EFF29",
+        //   "strikethrough": false,
+        //   "underline": false,
+        //   "backgroundColor": "transparent",
+        //   "bold": true,
+        //   "italic": false
+        // },
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#98C379",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        }
+    ]
 }

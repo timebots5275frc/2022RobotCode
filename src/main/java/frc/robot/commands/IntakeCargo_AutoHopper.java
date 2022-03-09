@@ -9,53 +9,53 @@ import frc.robot.constants.Constants;
 import frc.robot.subsystems.hopper.Hopper;
 import frc.robot.subsystems.intake.Intake;
 
-
-/** 
- * Command Procedure 
- * Button For Intaking Cargo
- * Start IntakeCargo_AutoHopper Command
- *   1. Start Intake Motor
- *   2. If both hopper positions are empty → move both hopper motors
- *   3. If ball in hopper position 2 → move new ball to hooper position 1
- *   4. If a ball is in both positions → the intake motor will be disabled.
+/**
+ * Command Procedure Button For Intaking Cargo Start IntakeCargo_AutoHopper
+ * Command 1. Start Intake
+ * Motor 2. If both hopper positions are empty → move both hopper motors 3. If
+ * ball in hopper
+ * position 2 → move new ball to hooper position 1 4. If a ball is in both
+ * positions → the intake
+ * motor will be disabled.
  */
 public class IntakeCargo_AutoHopper extends CommandBase {
-  /** Creates a new IntakeCargoAutoHopper. */
-  private Intake intake;
-  private Hopper hopper;
+    /** Creates a new IntakeCargoAutoHopper. */
+    private Intake intake;
+    private Hopper hopper;
 
-  public IntakeCargo_AutoHopper(Intake _intake, Hopper _hopper) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    intake = _intake;
-    hopper = _hopper;
-    addRequirements(_intake);
-    addRequirements(_hopper);
-  }
-  
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    public IntakeCargo_AutoHopper(Intake _intake, Hopper _hopper) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        intake = _intake;
+        hopper = _hopper;
+        addRequirements(_intake);
+        addRequirements(_hopper);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    intake.setIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
-    hopper.setLowerHopperMotor(Constants.HopperConstants.HOPPER_FIRE_SPEED);
-    hopper.setUpperHopperMotor(Constants.HopperConstants.HOPPER_FIRE_SPEED);
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    intake.setIntakeMotor(0);
-    hopper.setLowerHopperMotor(0);
-    hopper.setUpperHopperMotor(0);
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        intake.setIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
+        hopper.setLowerHopperMotor(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+        hopper.setUpperHopperMotor(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    }
 
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        intake.setIntakeMotor(0);
+        hopper.setLowerHopperMotor(0);
+        hopper.setUpperHopperMotor(0);
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

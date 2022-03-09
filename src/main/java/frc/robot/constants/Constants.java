@@ -6,7 +6,6 @@ package frc.robot.constants;
 
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -19,14 +18,14 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  */
 public class Constants {
     /**
-     *  
+     * 
      * @Title ControllerConstants
      */
     public static final class ControllerConstants {
         public static final int DRIVER_STICK_CHANNEL = 0;
         public static final int AUX_STICK_CHANNEL = 1;
         public static final int XBOXCONTROLLER_CHANNEL = 3;
-        
+
         public static final double DEADZONE_DRIVE = 0.1;
         public static final double DEADZONE_STEER = 0.3;
     }
@@ -75,7 +74,7 @@ public class Constants {
 
         public static final double MAX_DRIVE_SPEED = 3.5; // meters/second
         public static final double MAX_STEER_RATE = .5; // rotations/second of a wheel for steer.
-        public static final double MAX_TWIST_RATE =  .6 * 2.0 * Math.PI; // radians/second of the robot rotation.
+        public static final double MAX_TWIST_RATE = .6 * 2.0 * Math.PI; // radians/second of the robot rotation.
 
         // Drive motor gear ratio.
         // | Driving Gear | Driven Gear |
@@ -135,13 +134,14 @@ public class Constants {
     }
 
     public static final class ClimberConstants {
-        /*public static final double LEFT_CLIMBER_MOTOR_MAX_RPM = null;
-        public static final double RIGHT_CLIMBER_MOTOR_MAX_RPM = null;
-        public static final double ROTATING_CLIMBER_MOTOR_MAX_RPM = null;
-        public static final int LEFT_CLIMBER_MOTOR_ID = null;
-        public static final int RIGHT_CLIMBER_MOTOR_ID = null;
-        public static final int ROTATING_CLIMBER_MOTOR_ID = null;
-        */
+        /*
+         * public static final double LEFT_CLIMBER_MOTOR_MAX_RPM = null;
+         * public static final double RIGHT_CLIMBER_MOTOR_MAX_RPM = null;
+         * public static final double ROTATING_CLIMBER_MOTOR_MAX_RPM = null;
+         * public static final int LEFT_CLIMBER_MOTOR_ID = null;
+         * public static final int RIGHT_CLIMBER_MOTOR_ID = null;
+         * public static final int ROTATING_CLIMBER_MOTOR_ID = null;
+         */
     }
 
     /**
