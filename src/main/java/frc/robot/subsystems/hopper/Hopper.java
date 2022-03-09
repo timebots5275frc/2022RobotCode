@@ -4,14 +4,28 @@
 
 package frc.robot.subsystems.hopper;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 
 public class Hopper extends SubsystemBase {
+  VictorSPX lowerHopperMotor = new VictorSPX(Constants.HopperConstants.LOWER_HOPPER_MOTOR_ID);
+  VictorSPX upperHopperMotor = new VictorSPX(Constants.HopperConstants.UPPER_HOPPER_MOTOR_ID);
   /** Creates a new Hopper. */
   public Hopper() {}
-
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  
+  public void setLowerHopperMotor(double percentage) {
+    lowerHopperMotor.set(ControlMode.PercentOutput, percentage);
+  }
+  
+  public void setUpperHopperMotor(double percentage) {
+    upperHopperMotor.set(ControlMode.PercentOutput, percentage);
   }
 }

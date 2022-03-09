@@ -129,8 +129,8 @@ public class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int MOTOR_CAN_ID = 10;
-        public static final double MOTOR_SPEED = 0.7;
+        public static final int MOTOR_CAN_ID = 22;
+        public static final double MOTOR_SPEED = 0.25;
         public static final int COMPRESSOR_CAN_ID = -1;
     }
 
@@ -148,10 +148,10 @@ public class Constants {
      * @Title HopperConstants
      */
     public static final class HopperConstants {
-        //public static final int LOWER_HOPPER_MOTOR_ID = null;
-        //public static final int UPPER_HOPPER_MOTOR_ID = null;
-        public static final double HOPPER_FIRE_SPEED = 0.4;
-        public static final double HOPPER_BACK_SPEED = -0.4;
+        public static final int LOWER_HOPPER_MOTOR_ID = 21;
+        public static final int UPPER_HOPPER_MOTOR_ID = 22;
+        public static final double HOPPER_FIRE_SPEED = 0.25;
+        public static final double HOPPER_BACK_SPEED = -0.25;
         public static final double HOPPER_DEFAULT_SPEED = 0.2;
     }
 
