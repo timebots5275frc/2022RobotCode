@@ -130,6 +130,7 @@ public class Constants {
     public static final class IntakeConstants {
         public static final int MOTOR_CAN_ID = 22;
         public static final double MOTOR_SPEED = 0.25;
+        public static final double MOTOR_REVERSE_SPEED = -0.25;
         public static final int COMPRESSOR_CAN_ID = -1;
     }
 
