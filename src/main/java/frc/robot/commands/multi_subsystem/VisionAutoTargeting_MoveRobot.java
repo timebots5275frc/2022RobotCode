@@ -2,13 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.multi_subsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class AutonomousDrive extends CommandBase {
-    /** Creates a new AutonomousDrive. */
-    public AutonomousDrive() {
+/* To-do list
+Be able to rotate the robot with the Drivetrain to point toward the reflective tape.
+Be abe to get the x and y coordianates and the size of reflective tape
+Possibly get the number for the shooter speed
+*/
+
+public class VisionAutoTargeting_MoveRobot extends CommandBase {
+    /** Creates a new VisionAutoTargetingMoveRobot. */
+    public VisionAutoTargeting_MoveRobot() {
         // Use addRequirements() here to declare subsystem dependencies.
     }
 

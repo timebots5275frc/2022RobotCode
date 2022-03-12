@@ -2,18 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/**
- * Command Procedure 1. Start Shooter Motor 2. Wait until Shooter Motor is at
- * full speed. 3. Wait
- * for vision to see if we are on target (if we have it working)
- */
-public class AutonomousShootCargo extends CommandBase {
-    /** Creates a new AutonomousShootCargo. */
-    public AutonomousShootCargo() {
+public class AutonomousDrive extends CommandBase {
+    /** Creates a new AutonomousDrive. */
+    public AutonomousDrive() {
         // Use addRequirements() here to declare subsystem dependencies.
     }
 

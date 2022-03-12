@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutonomousDrive;
-import frc.robot.commands.AutonomousShootCargo;
-import frc.robot.commands.IntakeCargo_AutoHopper;
-import frc.robot.commands.ShootCargo_AutoHopper;
-import frc.robot.commands.TeleopJoystickDrive;
-import frc.robot.commands.VisionAutoTargeting_MoveRobot;
+import frc.robot.commands.autonomous.AutonomousDrive;
+import frc.robot.commands.autonomous.AutonomousShootCargo;
+import frc.robot.commands.multi_subsystem.IntakeCargo_AutoHopper;
+import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
+import frc.robot.commands.multi_subsystem.VisionAutoTargeting_MoveRobot;
+import frc.robot.commands.single_subsystem.TeleopJoystickDrive;
 import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.hopper.Hopper;
@@ -42,6 +42,10 @@ public class RobotContainer {
     public Shooter shooter = new Shooter();
     public Vision vision = new Vision();
 
+    // Joystick
+    private Joystick driveStick = new Joystick(0);
+    private Joystick auxStick = new Joystick(1);
+
     // Autonomous Commands
     private AutonomousDrive autonomousDrive = new AutonomousDrive();
     private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
@@ -51,8 +55,6 @@ public class RobotContainer {
     private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
     private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
-    private Joystick driveStick = new Joystick(0);
-    private Joystick auxStick = new Joystick(1);
     // Single Subsystem Commands
     private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, true);
 
