@@ -23,11 +23,11 @@ public class Hopper extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    public void setLowerHopperMotor(double percentage) {
+    public void runLowerHopper(double percentage) {
         lowerHopperMotor.set(ControlMode.PercentOutput, percentage);
     }
 
-    public void setUpperHopperMotor(double percentage) {
+    public void runUpperHopper(double percentage) {
         upperHopperMotor.set(ControlMode.PercentOutput, percentage);
     }
 }

@@ -14,7 +14,11 @@ import frc.robot.commands.autonomous.AutonomousShootCargo;
 import frc.robot.commands.multi_subsystem.IntakeCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.VisionAutoTargeting_MoveRobot;
+import frc.robot.commands.single_subsystem.RunIntake;
+import frc.robot.commands.single_subsystem.RunLowerHopper;
+import frc.robot.commands.single_subsystem.RunUpperHopper;
 import frc.robot.commands.single_subsystem.TeleopJoystickDrive;
+import frc.robot.constants.Constants;
 import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.hopper.Hopper;
@@ -57,6 +61,14 @@ public class RobotContainer {
 
     // Single Subsystem Commands
     private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, true);
+    private RunIntake runIntake = new RunIntake(intake, Constants.IntakeConstants.MOTOR_SPEED);
+    private RunIntake runIntakeBackwards = new RunIntake(intake, Constants.IntakeConstants.MOTOR_REVERSE_SPEED);
+    private RunLowerHopper runLowerHopper = new RunLowerHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    private RunLowerHopper runLowerHopperBackwards = new RunLowerHopper(hopper,
+            Constants.HopperConstants.HOPPER_BACK_SPEED);
+    private RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
+            Constants.HopperConstants.HOPPER_BACK_SPEED);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
