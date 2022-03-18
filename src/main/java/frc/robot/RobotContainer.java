@@ -71,13 +71,12 @@ public class RobotContainer {
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
 
-    private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM)
+    private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
-    public RobotContainer()
-    {
+    public RobotContainer() {
         // Configure the button bindings
         drivetrain.setDefaultCommand(teleopJoystickDrive);
         configureButtonBindings();
