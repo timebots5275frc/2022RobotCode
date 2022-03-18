@@ -16,6 +16,7 @@ import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.VisionAutoTargeting_MoveRobot;
 import frc.robot.commands.single_subsystem.RunIntake;
 import frc.robot.commands.single_subsystem.RunLowerHopper;
+import frc.robot.commands.single_subsystem.RunShooter;
 import frc.robot.commands.single_subsystem.RunUpperHopper;
 import frc.robot.commands.single_subsystem.TeleopJoystickDrive;
 import frc.robot.constants.Constants;
@@ -70,10 +71,13 @@ public class RobotContainer {
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
 
+    private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM)
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
-    public RobotContainer() {
+    public RobotContainer()
+    {
         // Configure the button bindings
         drivetrain.setDefaultCommand(teleopJoystickDrive);
         configureButtonBindings();
