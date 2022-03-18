@@ -7,12 +7,17 @@ package frc.robot.subsystems.hopper;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
 
 public class Hopper extends SubsystemBase {
     VictorSPX lowerHopperMotor = new VictorSPX(Constants.HopperConstants.LOWER_HOPPER_MOTOR_ID);
     VictorSPX upperHopperMotor = new VictorSPX(Constants.HopperConstants.UPPER_HOPPER_MOTOR_ID);
+    DigitalInput upperHopperSensor = new DigitalInput(9);
+    DigitalInput lowerHopperSensor = new DigitalInput(8);
+    boolean upperHopperStatus;
+    boolean lowerHopperStatus;
 
     /** Creates a new Hopper. */
     public Hopper() {
@@ -21,6 +26,14 @@ public class Hopper extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        upperHopperStatus = upperHopperSensor.get();
+        lowerHopperStatus = lowerHopperSensor.get();
+        if (upperHopperStatus == true) {
+            System.out.println("Upper Working");
+        }
+        if (lowerHopperStatus == true) {
+            System.out.println("Lower Working");
+        }
     }
 
     public void runLowerHopper(double percentage) {
