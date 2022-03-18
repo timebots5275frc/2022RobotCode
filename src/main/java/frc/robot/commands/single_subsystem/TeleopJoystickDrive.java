@@ -82,15 +82,15 @@ public class TeleopJoystickDrive extends CommandBase {
         rotRate *= throttle;
         // rotRate *= 0;
 
-        SmartDashboard.putNumber("throttle", throttle);
+        SmartDashboard.putNumber("joystick throttle", throttle);
 
-        SmartDashboard.putNumber("xSpeed", driveStick.getY());
-        SmartDashboard.putNumber("ySpeed", driveStick.getX());
-        SmartDashboard.putNumber("rotRate", driveStick.getTwist());
+        SmartDashboard.putNumber("joystick xSpeed", driveStick.getY());
+        SmartDashboard.putNumber("joystick ySpeed", driveStick.getX());
+        SmartDashboard.putNumber("joystick rotRate", driveStick.getTwist());
 
-        SmartDashboard.putNumber("smart xSpeed", xSpeed);
-        SmartDashboard.putNumber("smart ySpeed", ySpeed);
-        SmartDashboard.putNumber("smart rotRate", rotRate);
+        SmartDashboard.putNumber("joystick smart xSpeed", xSpeed);
+        SmartDashboard.putNumber("joystick smart ySpeed", ySpeed);
+        SmartDashboard.putNumber("joystick smart rotRate", rotRate);
 
         drivetrain.drive(xSpeed, ySpeed, rotRate, fieldRelative);
 

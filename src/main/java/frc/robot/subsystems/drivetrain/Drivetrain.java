@@ -11,7 +11,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants.DriveConstants;
 
@@ -51,6 +51,7 @@ public class Drivetrain extends SubsystemBase {
     @Override
     public void periodic() {
         this.updateOdometry();
+        SmartDashboard.putNumber("getHeading", getHeading().getDegrees());
     }
 
     /**

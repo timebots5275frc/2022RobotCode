@@ -37,10 +37,10 @@ public class Hopper extends SubsystemBase {
     }
 
     public void runLowerHopper(double percentage) {
-        lowerHopperMotor.set(ControlMode.PercentOutput, percentage);
+        lowerHopperMotor.set(ControlMode.PercentOutput, -percentage);
     }
 
     public void runUpperHopper(double percentage) {
-        upperHopperMotor.set(ControlMode.PercentOutput, percentage);
+        upperHopperMotor.set(ControlMode.PercentOutput, -percentage);
     }
 }

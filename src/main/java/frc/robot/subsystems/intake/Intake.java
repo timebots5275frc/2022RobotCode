@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void runIntakeMotor(double percentage) {
-        intakeVictor.set(ControlMode.PercentOutput, percentage);
+        intakeVictor.set(ControlMode.PercentOutput, -percentage);
     }
 
 }

@@ -61,7 +61,7 @@ public class RobotContainer {
     private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
     // Single Subsystem Commands
-    private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, true);
+    private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, false);
     private RunIntake runIntake = new RunIntake(intake, Constants.IntakeConstants.MOTOR_SPEED);
     private RunIntake runIntakeBackwards = new RunIntake(intake, Constants.IntakeConstants.MOTOR_REVERSE_SPEED);
     private RunLowerHopper runLowerHopper = new RunLowerHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
@@ -91,7 +91,10 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(driveStick, 1).whenHeld(runIntake, true);
+        new JoystickButton(driveStick, 2).whenHeld(runIntake, true);
+        new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
+        new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
+        new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
     }
 
     /**
