@@ -119,8 +119,8 @@ public class Constants {
     }
 
     public static final class ShooterConstants {
-        public static final int SHOOTER_RIGHT_MOTOR_ID = 52;
-        public static final int SHOOTER_LEFT_MOTOR_ID = 52;
+        public static final int SHOOTER_RIGHT_MOTOR_ID = 31;
+        public static final int SHOOTER_LEFT_MOTOR_ID = 30;
 
         public static final double LOWER_PORT_SHOOTER_FIRE_RPM = 800; // TODO -Lucas
         public static final double UPPER_PORT_SHOOTER_FIRE_RPM = 500; // TODO 1800 -Lucas
@@ -129,7 +129,7 @@ public class Constants {
     }
 
     public static final class IntakeConstants {
-        public static final int MOTOR_CAN_ID = 22;
+        public static final int MOTOR_CAN_ID = 20;
         public static final double MOTOR_SPEED = 0.25;
         public static final double MOTOR_REVERSE_SPEED = -0.25;
         public static final int COMPRESSOR_CAN_ID = -1;

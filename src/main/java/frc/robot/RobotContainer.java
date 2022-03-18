@@ -76,7 +76,6 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         drivetrain.setDefaultCommand(teleopJoystickDrive);
-        new JoystickButton(driveStick, 1).whenHeld(intakeCargo_AutoHopper, true);
         configureButtonBindings();
     }
 
@@ -89,6 +88,7 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+        new JoystickButton(driveStick, 1).whenHeld(runIntake, true);
     }
 
     /**

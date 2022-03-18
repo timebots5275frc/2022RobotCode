@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         shooterRightSparkMax = new CANSparkMax(Constants.ShooterConstants.SHOOTER_RIGHT_MOTOR_ID,
                 CANSparkMaxLowLevel.MotorType.kBrushless);
-        shooterLeftSparkMax = new CANSparkMax(Constants.ShooterConstants.SHOOTER_RIGHT_MOTOR_ID,
+        shooterLeftSparkMax = new CANSparkMax(Constants.ShooterConstants.SHOOTER_LEFT_MOTOR_ID,
                 CANSparkMaxLowLevel.MotorType.kBrushless);
 
         shooterRightSparkMax.setClosedLoopRampRate(1);
