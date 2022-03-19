@@ -37,6 +37,7 @@ public class Climber extends SubsystemBase {
 
         rightExtendingSparkMax.getEncoder().setPosition(0);
         leftExtendingSparkMax.getEncoder().setPosition(0);
+        leftExtendingSparkMax.setInverted(true);
 
         // leftExtendingSparkMax.setSoftLimit(SoftLimitDirection.kForward, 36 * 360);
         // leftExtendingSparkMax.setSoftLimit(SoftLimitDirection.kReverse, 0);
@@ -50,8 +51,8 @@ public class Climber extends SubsystemBase {
         kD = 0;
         kIz = 0;
         kFF = 0.0;
-        kMaxOutput = .1;
-        kMinOutput = -.1;
+        kMaxOutput = 1;
+        kMinOutput = -1;
 
         // set PID coefficients shooterRight
         leftExtending_pidController.setP(kP);
@@ -60,6 +61,7 @@ public class Climber extends SubsystemBase {
         leftExtending_pidController.setIZone(kIz);
         leftExtending_pidController.setFF(kFF);
         leftExtending_pidController.setOutputRange(kMinOutput, kMaxOutput);
+        leftExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
 
         // set PID coefficients shooterRight
         rightExtending_pidController.setP(kP);
@@ -68,6 +70,7 @@ public class Climber extends SubsystemBase {
         rightExtending_pidController.setIZone(kIz);
         rightExtending_pidController.setFF(kFF);
         rightExtending_pidController.setOutputRange(kMinOutput, kMaxOutput);
+        rightExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
 
     }
 
@@ -96,13 +99,46 @@ public class Climber extends SubsystemBase {
     // }
     // }
 
-    public void setRightExtendingArmPosition(double input) {
+    public void setRightExtendingArmPosition(double setPosition) {
 
-        // double newset = speedLimiter.calculate(input);
+        double limitedSetPosition = setPosition;
 
-        // System.out.println("newset = " + newset);
+        if (setPosition > Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT;
+        } else if (setPosition < Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT;
+        }
 
-        rightExtending_pidController.setReference(input, ControlType.kPosition);
+        rightExtending_pidController.setReference(limitedSetPosition, ControlType.kPosition, 0, 0);
+    }
+
+    public void setRightExtendingArmCurrent(double setCurrent) {
+        rightExtending_pidController.setReference(setCurrent, ControlType.kCurrent);
+    }
+
+    public void setLeftExtendingArmPosition(double setPosition) {
+
+        double limitedSetPosition = setPosition;
+
+        if (setPosition > Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT;
+        } else if (setPosition < Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT;
+        }
+
+        leftExtending_pidController.setReference(limitedSetPosition, ControlType.kPosition);
+    }
+
+    public void setLeftExtendingArmCurrent(double setCurrent) {
+        leftExtending_pidController.setReference(setCurrent, ControlType.kCurrent);
+    }
+
+    public void resetLeftExtendingArm() {
+        leftExtendingSparkMax.getEncoder().setPosition(0);
+    }
+
+    public void resetRightExtendingArm() {
+        rightExtendingSparkMax.getEncoder().setPosition(0);
 
     }
 
@@ -113,6 +149,12 @@ public class Climber extends SubsystemBase {
 
         SmartDashboard.putNumber("rightExtendingSparkMax getVelocity()",
                 rightExtendingSparkMax.getEncoder().getVelocity());
+
+        SmartDashboard.putNumber("leftExtendingSparkMax getPosition()",
+                leftExtendingSparkMax.getEncoder().getPosition());
+
+        SmartDashboard.putNumber("leftExtendingSparkMax getVelocity()",
+                leftExtendingSparkMax.getEncoder().getVelocity());
         // This method will be called once per scheduler run
     }
 }
