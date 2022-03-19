@@ -95,6 +95,8 @@ public class RobotContainer {
         new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
         new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
+        new JoystickButton(driveStick, 3).whenHeld(intakeCargo_AutoHopper, true);
+
     }
 
     /**
