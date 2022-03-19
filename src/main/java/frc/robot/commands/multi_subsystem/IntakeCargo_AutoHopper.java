@@ -48,7 +48,7 @@ public class IntakeCargo_AutoHopper extends CommandBase {
         } else { // Ball is blocking upperHopper sensor
             hopper.runUpperHopper(0);
 
-            if (hopper.lowerHopperStatus = true) { // Ball is NOT blocking lowerHopper sensor
+            if (hopper.lowerHopperStatus == true) { // Ball is NOT blocking lowerHopper sensor
                 hopper.runLowerHopper(Constants.HopperConstants.HOPPER_INTAKE_SPEED);
                 intake.runIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
 
