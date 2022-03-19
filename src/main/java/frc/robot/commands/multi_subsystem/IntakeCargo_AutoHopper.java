@@ -39,18 +39,22 @@ public class IntakeCargo_AutoHopper extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        intake.runIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
 
         if (hopper.upperHopperStatus == true) { // Ball is NOT blocking upperHopper sensor
             hopper.runLowerHopper(Constants.HopperConstants.HOPPER_INTAKE_SPEED);
             hopper.runUpperHopper(Constants.HopperConstants.HOPPER_INTAKE_SPEED);
+            intake.runIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
+
         } else { // Ball is blocking upperHopper sensor
             hopper.runUpperHopper(0);
 
             if (hopper.lowerHopperStatus = true) { // Ball is NOT blocking lowerHopper sensor
                 hopper.runLowerHopper(Constants.HopperConstants.HOPPER_INTAKE_SPEED);
+                intake.runIntakeMotor(Constants.IntakeConstants.MOTOR_SPEED);
+
             } else { // Ball is blocking lowerHopper sensor
                 hopper.runLowerHopper(0);
+                intake.runIntakeMotor(0);
             }
         }
     }
