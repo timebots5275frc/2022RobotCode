@@ -82,7 +82,7 @@ public class Shooter extends SubsystemBase {
     public void setShooterMotorSpeed(double input) {
         if (input < Constants.ShooterConstants.SHOOTER_MAX_RPM) {
             shooterRight_pidController.setReference(-input, ControlType.kVelocity);
-            shooterLeft_pidController.setReference(-input, ControlType.kVelocity);
+            shooterLeft_pidController.setReference(input, ControlType.kVelocity);
         } else {
             System.out.println("Shooter Motor Warning - Cannot Set Motor RPM Over Limit Of "
                     + Constants.ShooterConstants.SHOOTER_MAX_RPM);

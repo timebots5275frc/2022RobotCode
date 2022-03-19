@@ -142,6 +142,8 @@ public class Constants {
         public static final int LEFT_EXTENDING_CLIMBER_MOTOR_ID = 40;
         public static final int RIGHT_EXTENDING_CLIMBER_MOTOR_ID = 41;
         public static final int ROTATING_CLIMBER_MOTOR_ID = 42;
+        public static final float EXTENDING_CLIMBER_MAX_LIMIT = 300;
+        public static final double EXTENDING_CLIMBER_MIN_LIMIT = 0;
     }
 
     /**

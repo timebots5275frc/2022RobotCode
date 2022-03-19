@@ -44,16 +44,14 @@ public class Climber extends SubsystemBase {
         leftExtending_pidController = leftExtendingSparkMax.getPIDController();
         rightExtending_pidController = rightExtendingSparkMax.getPIDController();
 
-        speedLimiter.reset(0);
-
         // PID coefficients
         kP = 0.004;
         kI = 0;
         kD = 0;
         kIz = 0;
         kFF = 0.0;
-        kMaxOutput = .5;
-        kMinOutput = -.5;
+        kMaxOutput = .1;
+        kMinOutput = -.1;
 
         // set PID coefficients shooterRight
         leftExtending_pidController.setP(kP);
@@ -104,11 +102,8 @@ public class Climber extends SubsystemBase {
 
         // System.out.println("newset = " + newset);
 
-        if (true) {
-            rightExtending_pidController.setReference(input, ControlType.kPosition);
-        } else {
-            System.out.println("Shooter Motor Warning - Cannot Set Motor RPM Over Limit Of ");
-        }
+        rightExtending_pidController.setReference(input, ControlType.kPosition);
+
     }
 
     @Override

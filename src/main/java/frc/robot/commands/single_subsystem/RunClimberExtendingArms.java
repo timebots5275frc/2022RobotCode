@@ -28,7 +28,7 @@ public class RunClimberExtendingArms extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        climber.setRightExtendingArmPosition(400);
+        climber.setRightExtendingArmPosition(250);
     }
 
     // Called once the command ends or is interrupted.
