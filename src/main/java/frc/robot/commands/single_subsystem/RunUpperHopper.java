@@ -15,7 +15,7 @@ public class RunUpperHopper extends CommandBase {
     public RunUpperHopper(Hopper _hopper, double forwardOrBackward) {
         hopper = _hopper;
         direction = forwardOrBackward;
-        addRequirements(_hopper);
+        // addRequirements(_hopper);
         // Use addRequirements() here to declare subsystem dependencies.
     }
 

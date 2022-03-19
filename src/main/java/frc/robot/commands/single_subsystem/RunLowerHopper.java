@@ -16,7 +16,7 @@ public class RunLowerHopper extends CommandBase {
         // Use addRequirements() here to declare subsystem dependencies.
         hopper = _hopper;
         direction = forwardOrBackward;
-        addRequirements(_hopper);
+        // addRequirements(_hopper);
     }
 
     // Called when the command is initially scheduled.

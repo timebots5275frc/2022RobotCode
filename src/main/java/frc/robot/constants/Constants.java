@@ -152,9 +152,9 @@ public class Constants {
     public static final class HopperConstants {
         public static final int LOWER_HOPPER_MOTOR_ID = 21;
         public static final int UPPER_HOPPER_MOTOR_ID = 22;
-        public static final double HOPPER_FIRE_SPEED = 0.25;
-        public static final double HOPPER_BACK_SPEED = -0.25;
-        public static final double HOPPER_DEFAULT_SPEED = 0.2;
+        public static final double HOPPER_FIRE_SPEED = 0.40;
+        public static final double HOPPER_BACK_SPEED = -0.40;
+        public static final double HOPPER_INTAKE_SPEED = 0.40; // used when intaking
     }
 
 }
