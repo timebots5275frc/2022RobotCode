@@ -136,14 +136,12 @@ public class Constants {
     }
 
     public static final class ClimberConstants {
-        /*
-         * public static final double LEFT_CLIMBER_MOTOR_MAX_RPM = null;
-         * public static final double RIGHT_CLIMBER_MOTOR_MAX_RPM = null;
-         * public static final double ROTATING_CLIMBER_MOTOR_MAX_RPM = null;
-         * public static final int LEFT_CLIMBER_MOTOR_ID = null;
-         * public static final int RIGHT_CLIMBER_MOTOR_ID = null;
-         * public static final int ROTATING_CLIMBER_MOTOR_ID = null;
-         */
+
+        public static final double CLIMBER_EXTENDING_ARM_MOTOR_RPM = 2160;
+        public static final double ROTATING_CLIMBER_MOTOR_RPM = 1;
+        public static final int LEFT_EXTENDING_CLIMBER_MOTOR_ID = 40;
+        public static final int RIGHT_EXTENDING_CLIMBER_MOTOR_ID = 41;
+        public static final int ROTATING_CLIMBER_MOTOR_ID = 42;
     }
 
     /**

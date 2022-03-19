@@ -14,6 +14,7 @@ import frc.robot.commands.autonomous.AutonomousShootCargo;
 import frc.robot.commands.multi_subsystem.IntakeCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.VisionAutoTargeting_MoveRobot;
+import frc.robot.commands.single_subsystem.RunClimberExtendingArms;
 import frc.robot.commands.single_subsystem.RunIntake;
 import frc.robot.commands.single_subsystem.RunLowerHopper;
 import frc.robot.commands.single_subsystem.RunShooter;
@@ -72,6 +73,7 @@ public class RobotContainer {
             Constants.HopperConstants.HOPPER_BACK_SPEED);
 
     private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
+    private RunClimberExtendingArms runClimberExtendingArms = new RunClimberExtendingArms(climber);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -95,7 +97,7 @@ public class RobotContainer {
         new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
         new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
-        new JoystickButton(driveStick, 3).whenHeld(intakeCargo_AutoHopper, true);
+        new JoystickButton(driveStick, 5).whenHeld(runClimberExtendingArms, true);
 
     }
 
