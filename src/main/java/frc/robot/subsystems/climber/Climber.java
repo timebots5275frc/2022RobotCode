@@ -45,14 +45,17 @@ public class Climber extends SubsystemBase {
         leftExtending_pidController = leftExtendingSparkMax.getPIDController();
         rightExtending_pidController = rightExtendingSparkMax.getPIDController();
 
+        leftExtending_pidController.setReference(0, ControlType.kCurrent);
+        rightExtending_pidController.setReference(0, ControlType.kCurrent);
+
         // PID coefficients
-        kP = 0.004;
+        kP = 0.012;
         kI = 0;
         kD = 0;
         kIz = 0;
         kFF = 0.0;
-        kMaxOutput = 1;
-        kMinOutput = -1;
+        kMaxOutput = .5;
+        kMinOutput = -.5;
 
         // set PID coefficients shooterRight
         leftExtending_pidController.setP(kP);
@@ -61,7 +64,7 @@ public class Climber extends SubsystemBase {
         leftExtending_pidController.setIZone(kIz);
         leftExtending_pidController.setFF(kFF);
         leftExtending_pidController.setOutputRange(kMinOutput, kMaxOutput);
-        leftExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
+        // leftExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
 
         // set PID coefficients shooterRight
         rightExtending_pidController.setP(kP);
@@ -155,6 +158,11 @@ public class Climber extends SubsystemBase {
 
         SmartDashboard.putNumber("leftExtendingSparkMax getVelocity()",
                 leftExtendingSparkMax.getEncoder().getVelocity());
+
+        SmartDashboard.putNumber("leftExtendingSparkMax getMotorTemperature",
+                leftExtendingSparkMax.getMotorTemperature());
+        SmartDashboard.putNumber("leftExtendingSparkMax getOutputCurrent",
+                leftExtendingSparkMax.getOutputCurrent());
         // This method will be called once per scheduler run
     }
 }

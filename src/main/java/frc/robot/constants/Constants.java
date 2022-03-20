@@ -4,6 +4,8 @@
 
 package frc.robot.constants;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 /**
@@ -101,6 +103,7 @@ public class Constants {
         public static final PIDConstants PID_Encoder_Steer = new PIDConstants(20, 10, 0);
 
         public static final PIDConstants PID_SparkMax_Drive = new PIDConstants(0.0003, 0, 0, 0, 0.00016);
+        public static final int PIGEON_IMU_ID = 8;
     }
 
     public static final class AutoConstants {

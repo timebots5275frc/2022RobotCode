@@ -10,11 +10,13 @@ import frc.robot.subsystems.climber.Climber;
 public class RunClimberExtendingArms extends CommandBase {
 
     private Climber climber;
+    private double setPosition;
 
     /** Creates a new RunClimberExtendingArms. */
-    public RunClimberExtendingArms(Climber _climber) {
+    public RunClimberExtendingArms(Climber _climber, double _setPosition) {
 
         this.climber = _climber;
+        this.setPosition = _setPosition;
 
         addRequirements(climber);
         // Use addRequirements() here to declare subsystem dependencies.
@@ -28,8 +30,8 @@ public class RunClimberExtendingArms extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        climber.setLeftExtendingArmPosition(300);
-        climber.setRightExtendingArmPosition(300);
+        climber.setLeftExtendingArmPosition(setPosition);
+        climber.setRightExtendingArmPosition(setPosition);
     }
 
     // Called once the command ends or is interrupted.

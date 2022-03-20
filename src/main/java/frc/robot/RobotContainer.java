@@ -74,7 +74,8 @@ public class RobotContainer {
             Constants.HopperConstants.HOPPER_BACK_SPEED);
 
     private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
-    private RunClimberExtendingArms runClimberExtendingArms = new RunClimberExtendingArms(climber);
+    private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 150);
+    private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 25);
     private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
 
     /**
@@ -99,7 +100,8 @@ public class RobotContainer {
         new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
         new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
-        new JoystickButton(driveStick, 5).whenHeld(runClimberExtendingArms, true);
+        new JoystickButton(driveStick, 5).whenHeld(runExtendingArmsHIGH, true);
+        new JoystickButton(driveStick, 3).whenHeld(runExtendingArmsMID, true);
         new JoystickButton(driveStick, 11).whenHeld(runClimberExtendingArmsCurrent, true);
 
     }

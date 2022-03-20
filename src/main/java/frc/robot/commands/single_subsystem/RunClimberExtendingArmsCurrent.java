@@ -37,6 +37,7 @@ public class RunClimberExtendingArmsCurrent extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         climber.resetLeftExtendingArm();
+        climber.resetRightExtendingArm();
 
         climber.setLeftExtendingArmCurrent(0);
         climber.setRightExtendingArmCurrent(0);

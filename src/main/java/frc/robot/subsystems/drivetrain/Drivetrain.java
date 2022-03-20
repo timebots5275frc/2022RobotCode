@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems.drivetrain;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.PigeonIMUConfiguration;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -13,6 +16,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants.Constants;
 import frc.robot.constants.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
@@ -39,6 +43,8 @@ public class Drivetrain extends SubsystemBase {
 
     public final GyroWrapperADIS16470_IMU imuADIS16470 = new GyroWrapperADIS16470_IMU();
 
+    PigeonIMU gyroPigeonIMU = new PigeonIMU(Constants.DriveConstants.PIGEON_IMU_ID);
+
     public final SwerveDriveKinematics kinematics = new SwerveDriveKinematics(leftFrontWheelLoc, rightFrontWheelLoc,
             rightRearWheelLoc, leftRearWheelLoc);
 
@@ -46,6 +52,7 @@ public class Drivetrain extends SubsystemBase {
 
     public Drivetrain() {
         System.out.println("DriveTrain (:");
+
     }
 
     @Override
@@ -143,7 +150,7 @@ public class Drivetrain extends SubsystemBase {
      */
     public Rotation2d getHeading() {
 
-        Rotation2d heading = Rotation2d.fromDegrees(imuADIS16470.getYComplementaryAngle());
+        Rotation2d heading = Rotation2d.fromDegrees(gyroPigeonIMU.getYaw());
 
         // System.out.println( "getYComplementaryAngle = " + heading );
         // System.out.println( "getXComplementaryAngle = " +
