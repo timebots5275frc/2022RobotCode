@@ -131,15 +131,23 @@ public class Drivetrain extends SubsystemBase {
     }
 
     /** Zeroes the heading of the robot. */
-    public void resetADIS16470() {
-        System.out.println("resetADIS16470");
-        imuADIS16470.reset();
-    }
+    // public void resetADIS16470() {
+    // System.out.println("resetADIS16470");
+    // imuADIS16470.reset();
+    // }
 
     /** calibrate the heading of the robot. */
-    public void calibrateADIS16470() {
-        System.out.println("calibrateADIS16470");
-        imuADIS16470.calibrate();
+    // public void calibrateADIS16470() {
+    // System.out.println("calibrateADIS16470");
+    // imuADIS16470.calibrate();
+    // }
+
+    public void calibratePigeonIMU() {
+
+    }
+
+    public void resetPIgeonIMU() {
+        gyroPigeonIMU.setFusedHeading(0);
     }
 
     /**

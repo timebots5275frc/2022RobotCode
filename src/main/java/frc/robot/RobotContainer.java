@@ -103,7 +103,7 @@ public class RobotContainer {
         new JoystickButton(driveStick, 5).whenHeld(runExtendingArmsHIGH, true);
         new JoystickButton(driveStick, 3).whenHeld(runExtendingArmsMID, true);
         new JoystickButton(driveStick, 11).whenHeld(runClimberExtendingArmsCurrent, true);
-
+        new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
     }
 
     /**
