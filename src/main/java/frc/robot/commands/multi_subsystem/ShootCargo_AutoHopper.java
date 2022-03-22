@@ -5,6 +5,7 @@
 package frc.robot.commands.multi_subsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.constants.Constants;
 import frc.robot.subsystems.hopper.Hopper;
 import frc.robot.subsystems.shooter.Shooter;
 
@@ -17,11 +18,13 @@ public class ShootCargo_AutoHopper extends CommandBase {
     /** Creates a new ShootCargoAndAutoHopper. */
     private Shooter shooter;
     private Hopper hopper;
+    private double shooterRPM;
 
-    public ShootCargo_AutoHopper(Shooter _shooter, Hopper _hopper) {
+    public ShootCargo_AutoHopper(Shooter _shooter, Hopper _hopper, double _shooterRPM) {
         // Use addRequirements() here to declare subsystem dependencies.
         shooter = _shooter;
         hopper = _hopper;
+        shooterRPM = _shooterRPM;
         addRequirements(_shooter);
         addRequirements(_hopper);
     }
@@ -34,11 +37,23 @@ public class ShootCargo_AutoHopper extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        shooter.setShooterMotorSpeed(shooterRPM);
+        hopper.runLowerHopper(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+        hopper.runUpperHopper(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+
+        // if (hopper.upperHopperStatus == false) {
+        // hopper.runUpperHopper(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+        // }
+        // if (hopper.lowerHopperStatus == false) {
+        // hopper.runLowerHopper(Constants.HopperConstants.HOPPER_FIRE_SPEED);
+        // }
+
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        shooter.setShooterMotorSpeed(Constants.ShooterConstants.SHOOTER_DEFAULT_RPM);
     }
 
     // Returns true when the command should end.

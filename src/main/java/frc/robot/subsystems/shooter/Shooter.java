@@ -10,7 +10,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 
 import frc.robot.constants.Constants;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -91,6 +91,7 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("shooterRightSparkMax", shooterRightSparkMax.getEncoder().getVelocity());
         // This method will be called once per scheduler run
     }
 }

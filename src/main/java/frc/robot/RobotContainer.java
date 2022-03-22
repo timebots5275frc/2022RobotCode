@@ -59,11 +59,12 @@ public class RobotContainer {
 
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
-    private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper);
+    private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper,
+            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
     private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
     // Single Subsystem Commands
-    private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, false);
+    private TeleopJoystickDrive teleopJoystickDrive = new TeleopJoystickDrive(drivetrain, driveStick, auxStick, true);
     private RunIntake runIntake = new RunIntake(intake, Constants.IntakeConstants.MOTOR_SPEED);
     private RunIntake runIntakeBackwards = new RunIntake(intake, Constants.IntakeConstants.MOTOR_REVERSE_SPEED);
     private RunLowerHopper runLowerHopper = new RunLowerHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
@@ -96,13 +97,24 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(driveStick, 2).whenHeld(runIntake, true);
-        new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
-        new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
+        new JoystickButton(driveStick, 4).whenHeld(runIntakeBackwards, true);
+        new JoystickButton(driveStick, 4).whenHeld(runLowerHopperBackwards, true);
+        new JoystickButton(driveStick, 4).whenHeld(runUpperHopperBackwards, true);
+
+        new JoystickButton(driveStick, 6).whenHeld(runShooterFast, true);
+
+        new JoystickButton(driveStick, 2).whenHeld(intakeCargo_AutoHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
-        new JoystickButton(driveStick, 5).whenHeld(runExtendingArmsHIGH, true);
-        new JoystickButton(driveStick, 3).whenHeld(runExtendingArmsMID, true);
-        new JoystickButton(driveStick, 11).whenHeld(runClimberExtendingArmsCurrent, true);
+
+        new JoystickButton(driveStick, 3).whenHeld(runLowerHopper, true);
+        new JoystickButton(driveStick, 3).whenHeld(runUpperHopper, true);
+
+        // new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
+        // new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
+        // new JoystickButton(driveStick, 5).whenHeld(runExtendingArmsHIGH, true);
+        // new JoystickButton(driveStick, 3).whenHeld(runExtendingArmsMID, true);
+        // new JoystickButton(driveStick, 11).whenHeld(runClimberExtendingArmsCurrent,
+        // true);
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
     }
 
