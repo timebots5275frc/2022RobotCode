@@ -147,7 +147,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void resetPIgeonIMU() {
-        gyroPigeonIMU.setFusedHeading(0);
+        gyroPigeonIMU.setYaw(0);
     }
 
     /**
