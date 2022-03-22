@@ -126,7 +126,7 @@ public class Constants {
         public static final int SHOOTER_LEFT_MOTOR_ID = 30;
 
         public static final double LOWER_PORT_SHOOTER_FIRE_RPM = 800; // TODO -Lucas
-        public static final double UPPER_PORT_SHOOTER_FIRE_RPM = 4500; // TODO 1800 -Lucas
+        public static final double UPPER_PORT_SHOOTER_FIRE_RPM = 2500; // 4500 for 15ft
         public static final double SHOOTER_MAX_RPM = 5700; // 5700 is the max for NEO Motor -Lucas
         public static final double SHOOTER_DEFAULT_RPM = 0.0;
     }
@@ -145,7 +145,7 @@ public class Constants {
         public static final int LEFT_EXTENDING_CLIMBER_MOTOR_ID = 40;
         public static final int RIGHT_EXTENDING_CLIMBER_MOTOR_ID = 41;
         public static final int ROTATING_CLIMBER_MOTOR_ID = 42;
-        public static final float EXTENDING_CLIMBER_MAX_LIMIT = 310;
+        public static final float EXTENDING_CLIMBER_MAX_LIMIT = 320;
         public static final double EXTENDING_CLIMBER_MIN_LIMIT = 0;
     }
 

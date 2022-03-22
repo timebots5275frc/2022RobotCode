@@ -53,10 +53,6 @@ public class RobotContainer {
     private Joystick driveStick = new Joystick(0);
     private Joystick auxStick = new Joystick(1);
 
-    // Autonomous Commands
-    private AutonomousDrive autonomousDrive = new AutonomousDrive();
-    private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
-
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
     private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper,
@@ -73,10 +69,9 @@ public class RobotContainer {
     private RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
-
     private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
-    private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 150);
-    private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 25);
+    private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 320);
+    private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 10);
     private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
 
     /**
@@ -101,8 +96,6 @@ public class RobotContainer {
         new JoystickButton(driveStick, 4).whenHeld(runLowerHopperBackwards, true);
         new JoystickButton(driveStick, 4).whenHeld(runUpperHopperBackwards, true);
 
-        new JoystickButton(driveStick, 6).whenHeld(runShooterFast, true);
-
         new JoystickButton(driveStick, 2).whenHeld(intakeCargo_AutoHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
 
@@ -111,12 +104,16 @@ public class RobotContainer {
 
         // new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
         // new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
-        // new JoystickButton(driveStick, 5).whenHeld(runExtendingArmsHIGH, true);
-        // new JoystickButton(driveStick, 3).whenHeld(runExtendingArmsMID, true);
-        // new JoystickButton(driveStick, 11).whenHeld(runClimberExtendingArmsCurrent,
-        // true);
+        new JoystickButton(driveStick, 12).whenHeld(runExtendingArmsHIGH, true);
+        new JoystickButton(driveStick, 11).whenHeld(runExtendingArmsMID, true);
+        new JoystickButton(driveStick, 10).whenHeld(runClimberExtendingArmsCurrent, true);
+
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
     }
+
+    // Autonomous Commands
+    private AutonomousDrive autonomousDrive = new AutonomousDrive();
+    private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -124,6 +121,7 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
+
         // An ExampleCommand will run in autonomous
         return null;
     }

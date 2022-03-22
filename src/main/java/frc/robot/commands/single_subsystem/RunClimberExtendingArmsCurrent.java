@@ -30,7 +30,6 @@ public class RunClimberExtendingArmsCurrent extends CommandBase {
     public void execute() {
         climber.setLeftExtendingArmCurrent(-12);
         climber.setRightExtendingArmCurrent(-12);
-
     }
 
     // Called once the command ends or is interrupted.

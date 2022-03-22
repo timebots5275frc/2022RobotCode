@@ -92,7 +92,7 @@ public class Drivetrain extends SubsystemBase {
         // swerveModuleStates[0].speedMetersPerSecond );
 
         leftFrontSwerveModule.setDesiredState(swerveModuleStates[0], false);
-        rightFrontSwerveModule.setDesiredState(swerveModuleStates[1], true);
+        rightFrontSwerveModule.setDesiredState(swerveModuleStates[1], false);
         rightRearSwerveModule.setDesiredState(swerveModuleStates[2], false);
         leftRearSwerveModule.setDesiredState(swerveModuleStates[3], false);
     }

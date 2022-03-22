@@ -24,7 +24,8 @@ public class Climber extends SubsystemBase {
     private SparkMaxPIDController leftExtending_pidController;
     private SparkMaxPIDController rightExtending_pidController;
 
-    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
+    public double ex_kP, ex_kI, ex_kD, ex_kIz, ex_kFF, ex_kMaxOutput, ex_kMinOutput, ex_maxRPM, ex_smartMAXVelocity,
+            ex_smartMAXAcc, ex_allowedErr;
 
     /** Creates a new Climber. */
     public Climber() {
@@ -49,31 +50,48 @@ public class Climber extends SubsystemBase {
         rightExtending_pidController.setReference(0, ControlType.kCurrent);
 
         // PID coefficients
-        kP = 0.012;
-        kI = 0;
-        kD = 0;
-        kIz = 0;
-        kFF = 0.0;
-        kMaxOutput = .5;
-        kMinOutput = -.5;
+        ex_kP = 0.00016;
+        ex_kI = 0;
+        ex_kD = 0;
+        ex_kIz = 0;
+        ex_kFF = 0.0;
+        ex_kMaxOutput = .75;
+        ex_kMinOutput = -.75;
+        ex_smartMAXVelocity = 5000;
+        ex_smartMAXAcc = 5000;
+        ex_allowedErr = 2;
 
         // set PID coefficients shooterRight
-        leftExtending_pidController.setP(kP);
-        leftExtending_pidController.setI(kI);
-        leftExtending_pidController.setD(kD);
-        leftExtending_pidController.setIZone(kIz);
-        leftExtending_pidController.setFF(kFF);
-        leftExtending_pidController.setOutputRange(kMinOutput, kMaxOutput);
-        // leftExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
+        leftExtending_pidController.setP(0.008, 1);// Current control loop
+        leftExtending_pidController.setI(0, 1);// Current control loop
+        leftExtending_pidController.setD(0, 1);// Current control loop
+
+        leftExtending_pidController.setP(ex_kP, 0);
+        leftExtending_pidController.setI(ex_kI, 0);
+        leftExtending_pidController.setD(ex_kD, 0);
+        leftExtending_pidController.setIZone(ex_kIz, 0);
+        leftExtending_pidController.setFF(ex_kFF, 0);
+        leftExtending_pidController.setOutputRange(ex_kMinOutput, ex_kMaxOutput, 0);
+        leftExtending_pidController.setSmartMotionMaxVelocity(ex_smartMAXVelocity, 0);
+        leftExtending_pidController.setSmartMotionMaxAccel(ex_smartMAXAcc, 0);
+        leftExtending_pidController.setSmartMotionAllowedClosedLoopError(ex_allowedErr, 0);
+        leftExtending_pidController.setSmartMotionMinOutputVelocity(10, 0);
 
         // set PID coefficients shooterRight
-        rightExtending_pidController.setP(kP);
-        rightExtending_pidController.setI(kI);
-        rightExtending_pidController.setD(kD);
-        rightExtending_pidController.setIZone(kIz);
-        rightExtending_pidController.setFF(kFF);
-        rightExtending_pidController.setOutputRange(kMinOutput, kMaxOutput);
-        rightExtending_pidController.setSmartMotionMaxVelocity(2500, 0);
+        rightExtending_pidController.setP(0.008, 1); // Current control loop
+        rightExtending_pidController.setI(0, 1);// Current control loop
+        rightExtending_pidController.setD(0, 1);// Current control loop
+
+        rightExtending_pidController.setP(ex_kP, 0);
+        rightExtending_pidController.setI(ex_kI, 0);
+        rightExtending_pidController.setD(ex_kD, 0);
+        rightExtending_pidController.setIZone(ex_kIz, 0);
+        rightExtending_pidController.setFF(ex_kFF, 0);
+        rightExtending_pidController.setOutputRange(ex_kMinOutput, ex_kMaxOutput, 0);
+        rightExtending_pidController.setSmartMotionMaxVelocity(ex_smartMAXVelocity, 0);
+        rightExtending_pidController.setSmartMotionMaxAccel(ex_smartMAXAcc, 0);
+        rightExtending_pidController.setSmartMotionAllowedClosedLoopError(ex_allowedErr, 0);
+        rightExtending_pidController.setSmartMotionMinOutputVelocity(10, 0);
 
     }
 
@@ -112,11 +130,11 @@ public class Climber extends SubsystemBase {
             limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT;
         }
 
-        rightExtending_pidController.setReference(limitedSetPosition, ControlType.kPosition, 0, 0);
+        rightExtending_pidController.setReference(limitedSetPosition, ControlType.kSmartMotion, 0);
     }
 
     public void setRightExtendingArmCurrent(double setCurrent) {
-        rightExtending_pidController.setReference(setCurrent, ControlType.kCurrent);
+        rightExtending_pidController.setReference(setCurrent, ControlType.kCurrent, 1);
     }
 
     public void setLeftExtendingArmPosition(double setPosition) {
@@ -129,11 +147,11 @@ public class Climber extends SubsystemBase {
             limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT;
         }
 
-        leftExtending_pidController.setReference(limitedSetPosition, ControlType.kPosition);
+        leftExtending_pidController.setReference(limitedSetPosition, ControlType.kSmartMotion, 0);
     }
 
     public void setLeftExtendingArmCurrent(double setCurrent) {
-        leftExtending_pidController.setReference(setCurrent, ControlType.kCurrent);
+        leftExtending_pidController.setReference(setCurrent, ControlType.kCurrent, 1);
     }
 
     public void resetLeftExtendingArm() {
