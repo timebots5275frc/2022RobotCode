@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems.drivetrain;
 
+import java.util.List;
+
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.sensors.PigeonIMUConfiguration;
 
@@ -14,6 +16,9 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants;
@@ -189,6 +194,31 @@ public class Drivetrain extends SubsystemBase {
         rightFrontSwerveModule.setDesiredState(desiredStates, false);
         rightRearSwerveModule.setDesiredState(desiredStates, false);
         leftRearSwerveModule.setDesiredState(desiredStates, false);
+    }
+
+    public static Trajectory generateTrajectory(TrajectoryConfig config, List<Translation2d> list) {
+        Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+                // Start at the origin facing the +X direction
+                new Pose2d(0, 0, new Rotation2d(0)),
+                // Pass through these two interior waypoints, making an 's' curve path
+                List.of(new Translation2d(1.8 * 30 * .0254, .5 * 30 * .0254),
+                        new Translation2d(2.5 * 30 * .0254, 1.5 * 30 * .0254),
+                        new Translation2d(3.5 * 30 * .0254, 2.5 * 30 * .0254),
+                        new Translation2d(7.5 * 30 * .0254, 2.5 * 30 * .0254),
+                        new Translation2d(8.5 * 30 * .0254, 1.5 * 30 * .0254),
+                        new Translation2d(9.5 * 30 * .0254, 0.5 * 30 * .0254),
+                        new Translation2d(10.5 * 30 * .0254, 1.5 * 30 * .0254), // far point
+                        new Translation2d(9.5 * 30 * .0254, 2.5 * 30 * .0254),
+                        new Translation2d(8.5 * 30 * .0254, 1.5 * 30 * .0254),
+                        new Translation2d(7.7 * 30 * .0254, 0.5 * 30 * .0254),
+                        new Translation2d(5.5 * 30 * .0254, 0.5 * 30 * .0254),
+                        new Translation2d(3.5 * 30 * .0254, 0.5 * 30 * .0254),
+                        new Translation2d(2.5 * 30 * .0254, 1.5 * 30 * .0254),
+                        new Translation2d(1.5 * 30 * .0254, 2.5 * 30 * .0254)),
+                // End 3 meters straight ahead of where we started, facing forward
+                new Pose2d(.5 * 30 * .0254, 2.5 * 30 * .0254, new Rotation2d(0)), config);
+
+        return exampleTrajectory;
     }
 
     /**

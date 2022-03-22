@@ -4,6 +4,11 @@
 
 package frc.robot;
 
+import java.util.List;
+
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -22,6 +27,7 @@ import frc.robot.commands.single_subsystem.RunShooter;
 import frc.robot.commands.single_subsystem.RunUpperHopper;
 import frc.robot.commands.single_subsystem.TeleopJoystickDrive;
 import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.AutoConstants;
 import frc.robot.subsystems.climber.Climber;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.hopper.Hopper;
@@ -121,8 +127,35 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
     public Command getAutonomousCommand() {
+        System.out.println("getAutonomousCommand");
+        // Create config for trajectory
+        TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
+                AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
+                        // Add kinematics to ensure max speed is actually obeyed
+                        .setKinematics(drivetrain.kinematics);
+        // An example trajectory to follow. All units in meters.
+        // Trajectory exampleTrajectory = TrajectoryGenerator
+        // .generateTrajectory(List.of(new Pose2d(0, 0, new Rotation2d( 0 )), new
+        // Pose2d(-2, 0.1, new Rotation2d( 0 ))), config);
 
+        List<Translation2d> list = List.of(new Translation2d(1.8, .5), new Translation2d(2.5, 1.5),
+                new Translation2d(3.5, 2.5), new Translation2d(7.5, 2.5), new Translation2d(8.5, 1.5),
+                new Translation2d(9.5, 0.5), new Translation2d(10.5, 1.5), // far point
+                new Translation2d(9.5, 2.5), new Translation2d(8.5, 1.5), new Translation2d(7.7, 0.5),
+                new Translation2d(5.5, 0.5), new Translation2d(3.5, 0.5), new Translation2d(2.5, 1.5),
+                new Translation2d(1.5, 2.5));
+
+        Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
+
+        drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
         // An ExampleCommand will run in autonomous
+
+        /**
+         * y x 0 0 .5 .5
+         * 
+         * 
+         * 
+         */
         return null;
     }
 }
