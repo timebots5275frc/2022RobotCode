@@ -6,6 +6,10 @@ package frc.robot;
 
 import java.util.List;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
@@ -13,6 +17,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.autonomous.AutonomousDrive;
 import frc.robot.commands.autonomous.AutonomousShootCargo;
@@ -62,7 +67,7 @@ public class RobotContainer {
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
     private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper,
-            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
+            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM_1);
     private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
     // Single Subsystem Commands
@@ -75,7 +80,8 @@ public class RobotContainer {
     private RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
-    private RunShooter runShooterFast = new RunShooter(shooter, Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM);
+    private RunShooter runShooterFast = new RunShooter(shooter,
+            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM_2);
     private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 320);
     private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 10);
     private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
@@ -115,11 +121,17 @@ public class RobotContainer {
         new JoystickButton(driveStick, 10).whenHeld(runClimberExtendingArmsCurrent, true);
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
+        new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
     }
 
     // Autonomous Commands
     private AutonomousDrive autonomousDrive = new AutonomousDrive();
     private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
+
+    public PIDController xController = new PIDController(Constants.AutoConstants.kPXController, 0, 0);
+    public PIDController yController = new PIDController(Constants.AutoConstants.kPYController, 0, 0);
+    public ProfiledPIDController thetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController,
+            0, 0, Constants.AutoConstants.kThetaControllerConstraints);
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -129,33 +141,26 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         System.out.println("getAutonomousCommand");
         // Create config for trajectory
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
                 AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(drivetrain.kinematics);
-        // An example trajectory to follow. All units in meters.
-        // Trajectory exampleTrajectory = TrajectoryGenerator
-        // .generateTrajectory(List.of(new Pose2d(0, 0, new Rotation2d( 0 )), new
-        // Pose2d(-2, 0.1, new Rotation2d( 0 ))), config);
 
-        List<Translation2d> list = List.of(new Translation2d(1.8, .5), new Translation2d(2.5, 1.5),
-                new Translation2d(3.5, 2.5), new Translation2d(7.5, 2.5), new Translation2d(8.5, 1.5),
-                new Translation2d(9.5, 0.5), new Translation2d(10.5, 1.5), // far point
-                new Translation2d(9.5, 2.5), new Translation2d(8.5, 1.5), new Translation2d(7.7, 0.5),
-                new Translation2d(5.5, 0.5), new Translation2d(3.5, 0.5), new Translation2d(2.5, 1.5),
-                new Translation2d(1.5, 2.5));
+        // An example trajectory to follow. All units in meters.
+        List<Pose2d> list = List.of(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1, 0, new Rotation2d()));
 
         Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
 
-        drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
-        // An ExampleCommand will run in autonomous
+        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(exampleTrajectory,
+                drivetrain::getPose,
+                drivetrain.kinematics,
+                // Position controllers
+                xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
 
-        /**
-         * y x 0 0 .5 .5
-         * 
-         * 
-         * 
-         */
-        return null;
+        drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
+
+        return swerveControllerCommand; // .andThen(() -> drivetrain.drive(0, 0, 0, false));
+
     }
 }

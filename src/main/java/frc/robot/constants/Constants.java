@@ -125,8 +125,10 @@ public class Constants {
         public static final int SHOOTER_RIGHT_MOTOR_ID = 31;
         public static final int SHOOTER_LEFT_MOTOR_ID = 30;
 
-        public static final double LOWER_PORT_SHOOTER_FIRE_RPM = 800; // TODO -Lucas
-        public static final double UPPER_PORT_SHOOTER_FIRE_RPM = 2500; // 4500 for 15ft
+        public static final double LOWER_PORT_SHOOTER_FIRE_RPM = 1000; // TODO -Lucas
+        public static final double UPPER_PORT_SHOOTER_FIRE_RPM_1 = 3700; // 4500 for 15ft
+        public static final double UPPER_PORT_SHOOTER_FIRE_RPM_2 = 4000; // 4500 for 15ft
+        public static final double UPPER_PORT_SHOOTER_FIRE_RPM_3 = 5400; // 4500 for 15ft
         public static final double SHOOTER_MAX_RPM = 5700; // 5700 is the max for NEO Motor -Lucas
         public static final double SHOOTER_DEFAULT_RPM = 0.0;
     }
