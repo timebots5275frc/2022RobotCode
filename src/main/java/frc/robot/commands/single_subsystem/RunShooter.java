@@ -4,6 +4,7 @@
 
 package frc.robot.commands.single_subsystem;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.constants.Constants;
@@ -13,11 +14,13 @@ public class RunShooter extends CommandBase {
 
     private Shooter shooter_subsystem;
     private double shoterSpeedRPM;
+    private Joystick joyStick;
 
     /** Creates a new RunShooter. */
-    public RunShooter(Shooter _shooter_subsystem, double _shoterSpeedRPM) {
+    public RunShooter(Shooter _shooter_subsystem, double _shoterSpeedRPM, Joystick _joyStick) {
         this.shooter_subsystem = _shooter_subsystem;
         this.shoterSpeedRPM = _shoterSpeedRPM;
+        this.joyStick = _joyStick;
         addRequirements(shooter_subsystem);
 
         // Use addRequirements() here to declare subsystem dependencies.
@@ -31,7 +34,9 @@ public class RunShooter extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooter_subsystem.setShooterMotorSpeed(this.shoterSpeedRPM);
+        double throttle = -joyStick.getThrottle() * (this.shoterSpeedRPM * .1); // between 0 and 1 = 0% and 100%
+
+        shooter_subsystem.setShooterMotorSpeed(this.shoterSpeedRPM + throttle);
     }
 
     // Called once the command ends or is interrupted.

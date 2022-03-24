@@ -66,8 +66,9 @@ public class RobotContainer {
 
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
-    private ShootCargo_AutoHopper shootCargo_AutoHopper = new ShootCargo_AutoHopper(shooter, hopper,
-            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM_1);
+    // private ShootCargo_AutoHopper shootCargo_AutoHopper = new
+    // ShootCargo_AutoHopper(shooter, hopper,
+    // Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM_1);
     private VisionAutoTargeting_MoveRobot visionAutoTargeting_MoveRobot = new VisionAutoTargeting_MoveRobot();
 
     // Single Subsystem Commands
@@ -80,11 +81,14 @@ public class RobotContainer {
     private RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
-    private RunShooter runShooterFast = new RunShooter(shooter,
-            Constants.ShooterConstants.UPPER_PORT_SHOOTER_FIRE_RPM_2);
     private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 320);
     private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 10);
     private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
+
+    private RunShooter runShooterLower = new RunShooter(shooter, 1000, auxStick);
+    private RunShooter runShooterUpperOnLine1 = new RunShooter(shooter, 4000, auxStick); // 3500rpm for line
+    private RunShooter runShooterUpperBall2 = new RunShooter(shooter, 5000, auxStick);
+    private RunShooter runShooterUpperClimber3 = new RunShooter(shooter, 5000, auxStick);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -109,7 +113,7 @@ public class RobotContainer {
         new JoystickButton(driveStick, 4).whenHeld(runUpperHopperBackwards, true);
 
         new JoystickButton(driveStick, 2).whenHeld(intakeCargo_AutoHopper, true);
-        new JoystickButton(driveStick, 1).whenHeld(runShooterFast, true);
+        new JoystickButton(driveStick, 1).whenHeld(runShooterUpperOnLine1, true);
 
         new JoystickButton(driveStick, 3).whenHeld(runLowerHopper, true);
         new JoystickButton(driveStick, 3).whenHeld(runUpperHopper, true);
@@ -148,7 +152,7 @@ public class RobotContainer {
                         .setKinematics(drivetrain.kinematics);
 
         // An example trajectory to follow. All units in meters.
-        List<Pose2d> list = List.of(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1, 0, new Rotation2d()));
+        List<Pose2d> list = List.of(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1.5, 0, new Rotation2d()));
 
         Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
 

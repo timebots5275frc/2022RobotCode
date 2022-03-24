@@ -57,7 +57,7 @@ public class Climber extends SubsystemBase {
         ex_kFF = 0.0;
         ex_kMaxOutput = .75;
         ex_kMinOutput = -.75;
-        ex_smartMAXVelocity = 5000;
+        ex_smartMAXVelocity = 7500;
         ex_smartMAXAcc = 5000;
         ex_allowedErr = 2;
 
@@ -165,22 +165,29 @@ public class Climber extends SubsystemBase {
 
     @Override
     public void periodic() {
+
+        // Right
+
         SmartDashboard.putNumber("rightExtendingSparkMax getPosition()",
                 rightExtendingSparkMax.getEncoder().getPosition());
-
         SmartDashboard.putNumber("rightExtendingSparkMax getVelocity()",
                 rightExtendingSparkMax.getEncoder().getVelocity());
+        SmartDashboard.putNumber("rightExtendingSparkMax getMotorTemperature",
+                rightExtendingSparkMax.getMotorTemperature());
+        SmartDashboard.putNumber("rightExtendingSparkMax getOutputCurrent",
+                rightExtendingSparkMax.getOutputCurrent());
+
+        // Left
 
         SmartDashboard.putNumber("leftExtendingSparkMax getPosition()",
                 leftExtendingSparkMax.getEncoder().getPosition());
-
         SmartDashboard.putNumber("leftExtendingSparkMax getVelocity()",
                 leftExtendingSparkMax.getEncoder().getVelocity());
-
         SmartDashboard.putNumber("leftExtendingSparkMax getMotorTemperature",
                 leftExtendingSparkMax.getMotorTemperature());
         SmartDashboard.putNumber("leftExtendingSparkMax getOutputCurrent",
                 leftExtendingSparkMax.getOutputCurrent());
+
         // This method will be called once per scheduler run
     }
 }
