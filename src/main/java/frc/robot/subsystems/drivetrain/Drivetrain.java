@@ -198,7 +198,6 @@ public class Drivetrain extends SubsystemBase {
 
     public static Trajectory generateTrajectory(TrajectoryConfig config, List<Pose2d> list) {
         Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(list, config);
-
         return exampleTrajectory;
     }
 

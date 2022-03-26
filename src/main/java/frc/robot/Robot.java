@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +24,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-    private Command m_autonomousCommand;
+    private ParallelCommandGroup m_autonomousCommandDrive;
+    SequentialCommandGroup DriveAndHopper;
 
     private RobotContainer timeBotsRobotContainer;
 
@@ -79,11 +82,18 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autonomousCommand = timeBotsRobotContainer.getAutonomousCommand();
+        Command m_autonomousCommand = timeBotsRobotContainer.getAutonomousCommand();
+
+        DriveAndHopper = new SequentialCommandGroup(
+                timeBotsRobotContainer.getAutonomousCommand(),
+                timeBotsRobotContainer.autonomousHopperCargo);
+
+        m_autonomousCommandDrive = new ParallelCommandGroup(DriveAndHopper,
+                timeBotsRobotContainer.autonomousShootCargo);
 
         // schedule the autonomous command (example)
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.schedule();
+        if (m_autonomousCommandDrive != null) {
+            m_autonomousCommandDrive.schedule();
         }
     }
 
@@ -107,8 +117,9 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (m_autonomousCommand != null) {
-            m_autonomousCommand.cancel();
+        if (m_autonomousCommandDrive != null) {
+            m_autonomousCommandDrive.cancel();
+            DriveAndHopper.cancel();
         }
     }
 

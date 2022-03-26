@@ -58,7 +58,7 @@ public class Climber extends SubsystemBase {
         ex_kMaxOutput = .75;
         ex_kMinOutput = -.75;
         ex_smartMAXVelocity = 7500;
-        ex_smartMAXAcc = 5000;
+        ex_smartMAXAcc = 7500;
         ex_allowedErr = 2;
 
         // set PID coefficients shooterRight

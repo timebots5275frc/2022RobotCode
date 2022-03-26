@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.autonomous.AutoHopper;
 import frc.robot.commands.autonomous.AutonomousDrive;
 import frc.robot.commands.autonomous.AutonomousShootCargo;
 import frc.robot.commands.multi_subsystem.IntakeCargo_AutoHopper;
@@ -64,6 +65,11 @@ public class RobotContainer {
     private Joystick driveStick = new Joystick(0);
     private Joystick auxStick = new Joystick(1);
 
+    // Autonomous Commands
+    // private AutonomousDrive autonomousDrive = new AutonomousDrive(drivetrain);
+    public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo(shooter, 3800);
+    public AutoHopper autonomousHopperCargo = new AutoHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
+
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
     // private ShootCargo_AutoHopper shootCargo_AutoHopper = new
@@ -78,7 +84,7 @@ public class RobotContainer {
     private RunLowerHopper runLowerHopper = new RunLowerHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
     private RunLowerHopper runLowerHopperBackwards = new RunLowerHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
-    private RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    public RunUpperHopper runUpperHopper = new RunUpperHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
     private RunUpperHopper runUpperHopperBackwards = new RunUpperHopper(hopper,
             Constants.HopperConstants.HOPPER_BACK_SPEED);
     private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 320);
@@ -86,7 +92,7 @@ public class RobotContainer {
     private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
 
     private RunShooter runShooterLower = new RunShooter(shooter, 1000, auxStick);
-    private RunShooter runShooterUpperOnLine1 = new RunShooter(shooter, 4000, auxStick); // 3500rpm for line
+    public RunShooter runShooterUpperOnLine1 = new RunShooter(shooter, 4000, auxStick); // 3500rpm for line
     private RunShooter runShooterUpperBall2 = new RunShooter(shooter, 5000, auxStick);
     private RunShooter runShooterUpperClimber3 = new RunShooter(shooter, 5000, auxStick);
 
@@ -128,10 +134,6 @@ public class RobotContainer {
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
     }
 
-    // Autonomous Commands
-    private AutonomousDrive autonomousDrive = new AutonomousDrive();
-    private AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo();
-
     public PIDController xController = new PIDController(Constants.AutoConstants.kPXController, 0, 0);
     public PIDController yController = new PIDController(Constants.AutoConstants.kPYController, 0, 0);
     public ProfiledPIDController thetaController = new ProfiledPIDController(Constants.AutoConstants.kPThetaController,
@@ -151,8 +153,10 @@ public class RobotContainer {
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(drivetrain.kinematics);
 
+        config.setReversed(true);
         // An example trajectory to follow. All units in meters.
-        List<Pose2d> list = List.of(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1.5, 0, new Rotation2d()));
+        List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+                new Pose2d(-1.5, 0, Rotation2d.fromDegrees(0)));
 
         Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
 
@@ -164,7 +168,7 @@ public class RobotContainer {
 
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
 
-        return swerveControllerCommand; // .andThen(() -> drivetrain.drive(0, 0, 0, false));
+        return swerveControllerCommand;
 
     }
 }

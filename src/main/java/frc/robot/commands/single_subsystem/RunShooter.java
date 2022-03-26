@@ -5,6 +5,7 @@
 package frc.robot.commands.single_subsystem;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.constants.Constants;
@@ -37,6 +38,8 @@ public class RunShooter extends CommandBase {
         double throttle = -joyStick.getThrottle() * (this.shoterSpeedRPM * .1); // between 0 and 1 = 0% and 100%
 
         shooter_subsystem.setShooterMotorSpeed(this.shoterSpeedRPM + throttle);
+
+        SmartDashboard.putNumber("SetShooterSpeed", this.shoterSpeedRPM + throttle);
     }
 
     // Called once the command ends or is interrupted.
