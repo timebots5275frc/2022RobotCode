@@ -2,23 +2,23 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.single_subsystem;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.hopper.Hopper;
 import frc.robot.subsystems.intake.Intake;
 
-public class RunIntake extends CommandBase {
+public class AutonomousIntake extends CommandBase {
     /** Creates a new RunIntake. */
     private Intake intake;
     private double direction;
 
-    public RunIntake(Intake _intake, double forwardOrBackward) {
+    public AutonomousIntake(Intake _intake, double forwardOrBackward) {
         // Use addRequirements() here to declare subsystem dependencies.
         intake = _intake;
         direction = forwardOrBackward;
-        addRequirements(_intake);
+        // addRequirements(_intake);
     }
 
     // Called when the command is initially scheduled.

@@ -153,10 +153,11 @@ public class RobotContainer {
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(drivetrain.kinematics);
 
-        config.setReversed(true);
+        config.setReversed(false);
         // An example trajectory to follow. All units in meters.
         List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-                new Pose2d(-1.5, 0, Rotation2d.fromDegrees(0)));
+                new Pose2d(1.5, 0, Rotation2d.fromDegrees(0)),
+                new Pose2d(1.5, 0, Rotation2d.fromDegrees(179.9)));
 
         Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
 
