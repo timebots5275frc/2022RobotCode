@@ -7,12 +7,12 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.hopper.Hopper;
 
-public class AutoHopper extends CommandBase {
+public class AutonomousHopper extends CommandBase {
     private Hopper hopper;
     private double direction;
 
     /** Creates a new AutoHopper. */
-    public AutoHopper(Hopper _hopper, double forwardOrBackward) {
+    public AutonomousHopper(Hopper _hopper, double forwardOrBackward) {
         hopper = _hopper;
         direction = forwardOrBackward;
         // addRequirements(_hopper);
