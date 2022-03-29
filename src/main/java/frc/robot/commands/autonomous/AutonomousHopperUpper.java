@@ -7,12 +7,12 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.hopper.Hopper;
 
-public class AutonomousHopper extends CommandBase {
+public class AutonomousHopperUpper extends CommandBase {
     private Hopper hopper;
     private double direction;
 
-    /** Creates a new AutoHopper. */
-    public AutonomousHopper(Hopper _hopper, double forwardOrBackward) {
+    /** Creates a new AutonomousHopperUpper. */
+    public AutonomousHopperUpper(Hopper _hopper, double forwardOrBackward) {
         hopper = _hopper;
         direction = forwardOrBackward;
         // addRequirements(_hopper);
@@ -28,14 +28,12 @@ public class AutonomousHopper extends CommandBase {
     @Override
     public void execute() {
         hopper.runUpperHopper(direction);
-        hopper.runLowerHopper(direction);
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         hopper.runUpperHopper(0);
-        hopper.runLowerHopper(0);
     }
 
     // Returns true when the command should end.

@@ -24,8 +24,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
  * project.
  */
 public class Robot extends TimedRobot {
-    private ParallelCommandGroup m_autonomousCommandDrive;
-    SequentialCommandGroup DriveAndHopper;
+    private ParallelCommandGroup Autonomous1_DriveAndIntakeAndHopper;
+    private SequentialCommandGroup Autonomous1_DriveThenHopper;
+    private Command Autonomous1_Shooter;
+
+    private ParallelCommandGroup Autonomous2;
+    private ParallelCommandGroup Autonomous3;
 
     private RobotContainer timeBotsRobotContainer;
 
@@ -82,18 +86,20 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        Command m_autonomousCommand = timeBotsRobotContainer.getAutonomousCommand();
 
-        DriveAndHopper = new SequentialCommandGroup(
-                timeBotsRobotContainer.getAutonomousCommand(),
+        Autonomous1_DriveAndIntakeAndHopper = new ParallelCommandGroup(timeBotsRobotContainer.getAutonomousCommand(),
+                timeBotsRobotContainer.autonomousIntakeCargo, timeBotsRobotContainer.autonomousHopperLowerCargo);
+
+        Autonomous1_Shooter = timeBotsRobotContainer.autonomousShootCargo;
+
+        Autonomous1_DriveThenHopper = new SequentialCommandGroup(
+                Autonomous1_DriveAndIntakeAndHopper,
                 timeBotsRobotContainer.autonomousHopperCargo);
 
-        m_autonomousCommandDrive = new ParallelCommandGroup(DriveAndHopper,
-                timeBotsRobotContainer.autonomousShootCargo);
-
         // schedule the autonomous command (example)
-        if (m_autonomousCommandDrive != null) {
-            m_autonomousCommandDrive.schedule();
+        if (Autonomous1_DriveThenHopper != null) {
+            Autonomous1_DriveThenHopper.schedule();
+            Autonomous1_Shooter.schedule();
         }
     }
 
@@ -117,9 +123,9 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (m_autonomousCommandDrive != null) {
-            m_autonomousCommandDrive.cancel();
-            DriveAndHopper.cancel();
+        if (Autonomous1_DriveAndIntakeAndHopper != null) {
+            Autonomous1_DriveThenHopper.cancel();
+            Autonomous1_Shooter.cancel();
         }
     }
 

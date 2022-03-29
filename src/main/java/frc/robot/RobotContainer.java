@@ -19,8 +19,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.autonomous.AutoHopper;
 import frc.robot.commands.autonomous.AutonomousDrive;
+import frc.robot.commands.autonomous.AutonomousHopper;
+import frc.robot.commands.autonomous.AutonomousHopperLower;
+import frc.robot.commands.autonomous.AutonomousHopperUpper;
+import frc.robot.commands.autonomous.AutonomousIntake;
 import frc.robot.commands.autonomous.AutonomousShootCargo;
 import frc.robot.commands.multi_subsystem.IntakeCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
@@ -68,7 +71,14 @@ public class RobotContainer {
     // Autonomous Commands
     // private AutonomousDrive autonomousDrive = new AutonomousDrive(drivetrain);
     public AutonomousShootCargo autonomousShootCargo = new AutonomousShootCargo(shooter, 3800);
-    public AutoHopper autonomousHopperCargo = new AutoHopper(hopper, Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    public AutonomousHopper autonomousHopperCargo = new AutonomousHopper(hopper,
+            Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    public AutonomousHopperUpper autonomousHopperUpperCargo = new AutonomousHopperUpper(hopper,
+            Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    public AutonomousHopperLower autonomousHopperLowerCargo = new AutonomousHopperLower(hopper,
+            Constants.HopperConstants.HOPPER_FIRE_SPEED);
+    public AutonomousIntake autonomousIntakeCargo = new AutonomousIntake(intake,
+            Constants.HopperConstants.HOPPER_FIRE_SPEED);
 
     // Multi Subsystem Commands
     private IntakeCargo_AutoHopper intakeCargo_AutoHopper = new IntakeCargo_AutoHopper(intake, hopper);
