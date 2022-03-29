@@ -30,6 +30,7 @@ import frc.robot.commands.multi_subsystem.ShootCargo_AutoHopper;
 import frc.robot.commands.multi_subsystem.VisionAutoTargeting_MoveRobot;
 import frc.robot.commands.single_subsystem.RunClimberExtendingArms;
 import frc.robot.commands.single_subsystem.RunClimberExtendingArmsCurrent;
+import frc.robot.commands.single_subsystem.RunDrive;
 import frc.robot.commands.single_subsystem.RunIntake;
 import frc.robot.commands.single_subsystem.RunLowerHopper;
 import frc.robot.commands.single_subsystem.RunShooter;
@@ -106,6 +107,8 @@ public class RobotContainer {
     private RunShooter runShooterUpperBall2 = new RunShooter(shooter, 5000, auxStick);
     private RunShooter runShooterUpperClimber3 = new RunShooter(shooter, 5000, auxStick);
 
+    private RunDrive runDrive = new RunDrive(drivetrain);
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -139,6 +142,8 @@ public class RobotContainer {
         new JoystickButton(driveStick, 12).whenHeld(runExtendingArmsHIGH, true);
         new JoystickButton(driveStick, 11).whenHeld(runExtendingArmsMID, true);
         new JoystickButton(driveStick, 10).whenHeld(runClimberExtendingArmsCurrent, true);
+
+        new JoystickButton(driveStick, 6).whenHeld(runDrive);
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
