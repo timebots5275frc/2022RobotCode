@@ -87,19 +87,23 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
 
-        Autonomous1_DriveAndIntakeAndHopper = new ParallelCommandGroup(timeBotsRobotContainer.getAutonomousCommand(),
-                timeBotsRobotContainer.autonomousIntakeCargo, timeBotsRobotContainer.autonomousHopperLowerCargo);
+        // Autonomous1_DriveAndIntakeAndHopper = new
+        // ParallelCommandGroup(timeBotsRobotContainer.getAutonomousCommand(),
+        // timeBotsRobotContainer.autonomousIntakeCargo,
+        // timeBotsRobotContainer.autonomousHopperLowerCargo);
 
-        Autonomous1_Shooter = timeBotsRobotContainer.autonomousShootCargo;
+        // Autonomous1_Shooter = timeBotsRobotContainer.autonomousShootCargo;
 
         Autonomous1_DriveThenHopper = new SequentialCommandGroup(
-                Autonomous1_DriveAndIntakeAndHopper,
-                timeBotsRobotContainer.autonomousHopperCargo);
+                timeBotsRobotContainer.getAutonomousCommand(),
+                timeBotsRobotContainer.autonomousHopperUpperCargo);
 
         // schedule the autonomous command (example)
         if (Autonomous1_DriveThenHopper != null) {
             Autonomous1_DriveThenHopper.schedule();
-            Autonomous1_Shooter.schedule();
+            timeBotsRobotContainer.autonomousShootCargo.schedule();
+            timeBotsRobotContainer.autonomousIntakeCargo.schedule();
+            timeBotsRobotContainer.autonomousHopperLowerCargo.schedule();
         }
     }
 
@@ -124,8 +128,11 @@ public class Robot extends TimedRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (Autonomous1_DriveAndIntakeAndHopper != null) {
+
             Autonomous1_DriveThenHopper.cancel();
-            Autonomous1_Shooter.cancel();
+            timeBotsRobotContainer.autonomousShootCargo.cancel();
+            timeBotsRobotContainer.autonomousIntakeCargo.cancel();
+            timeBotsRobotContainer.autonomousHopperLowerCargo.cancel();
         }
     }
 

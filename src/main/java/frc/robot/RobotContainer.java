@@ -13,10 +13,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.autonomous.AutonomousDrive;
@@ -159,7 +161,7 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public Command getAutonomousCommand() {
+    public SequentialCommandGroup getAutonomousCommand() {
         System.out.println("getAutonomousCommand");
         // Create config for trajectory
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
@@ -171,10 +173,19 @@ public class RobotContainer {
         config.setReversed(false);
         // An example trajectory to follow. All units in meters.
         List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-                new Pose2d(1.5, 0, Rotation2d.fromDegrees(0)),
-                new Pose2d(1.5, 0, Rotation2d.fromDegrees(179.9)));
+                new Pose2d(1.4, 0, Rotation2d.fromDegrees(0)));
 
-        Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
+        List<Pose2d> list2 = List.of(new Pose2d(1.4, 0, Rotation2d.fromDegrees(0)),
+                new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)));
+
+        List<Pose2d> list3 = List.of(new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)),
+                new Pose2d(2.2, 0, Rotation2d.fromDegrees(180)));
+
+        Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(list, config);
+
+        Trajectory exampleTrajectory2 = TrajectoryGenerator.generateTrajectory(list2, config);
+
+        Trajectory exampleTrajectory3 = TrajectoryGenerator.generateTrajectory(list3, config);
 
         SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(exampleTrajectory,
                 drivetrain::getPose,
@@ -182,9 +193,20 @@ public class RobotContainer {
                 // Position controllers
                 xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
 
+        SwerveControllerCommand swerveControllerCommand2 = new SwerveControllerCommand(exampleTrajectory2,
+                drivetrain::getPose,
+                drivetrain.kinematics,
+                // Position controllers
+                xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
+
+        SwerveControllerCommand swerveControllerCommand3 = new SwerveControllerCommand(exampleTrajectory3,
+                drivetrain::getPose,
+                drivetrain.kinematics,
+                // Position controllers
+                xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
 
-        return swerveControllerCommand;
+        return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3);
 
     }
 }
