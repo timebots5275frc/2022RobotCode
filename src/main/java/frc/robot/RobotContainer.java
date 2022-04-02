@@ -103,9 +103,9 @@ public class RobotContainer {
             Constants.HopperConstants.HOPPER_BACK_SPEED);
     private RunClimberExtendingArms runExtendingArmsHIGH = new RunClimberExtendingArms(climber, 320);
     private RunClimberExtendingArms runExtendingArmsMID = new RunClimberExtendingArms(climber, 10);
-    private RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
+    public RunClimberExtendingArmsCurrent runClimberExtendingArmsCurrent = new RunClimberExtendingArmsCurrent(climber);
 
-    private RunShooter runShooterLower = new RunShooter(shooter, 1000, auxStick);
+    private RunShooter runShooterLower = new RunShooter(shooter, 1500, auxStick);
     public RunShooter runShooterUpperOnLine1 = new RunShooter(shooter, 4000, auxStick); // 3500rpm for line
     private RunShooter runShooterUpperBall2 = new RunShooter(shooter, 5000, auxStick);
     private RunShooter runShooterUpperClimber3 = new RunShooter(shooter, 5000, auxStick);
@@ -130,23 +130,28 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
-        new JoystickButton(driveStick, 4).whenHeld(runIntakeBackwards, true);
-        new JoystickButton(driveStick, 4).whenHeld(runLowerHopperBackwards, true);
-        new JoystickButton(driveStick, 4).whenHeld(runUpperHopperBackwards, true);
-
-        new JoystickButton(driveStick, 2).whenHeld(intakeCargo_AutoHopper, true);
         new JoystickButton(driveStick, 1).whenHeld(runShooterUpperOnLine1, true);
+        new JoystickButton(driveStick, 2).whenHeld(intakeCargo_AutoHopper, true);
+
+        new JoystickButton(driveStick, 5).whenHeld(runShooterLower);
 
         new JoystickButton(driveStick, 3).whenHeld(runLowerHopper, true);
         new JoystickButton(driveStick, 3).whenHeld(runUpperHopper, true);
 
+        new JoystickButton(driveStick, 4).whenHeld(runIntakeBackwards, true);
+        new JoystickButton(driveStick, 4).whenHeld(runLowerHopperBackwards, true);
+        new JoystickButton(driveStick, 4).whenHeld(runUpperHopperBackwards, true);
+
         // new JoystickButton(driveStick, 4).whenHeld(runLowerHopper, true);
         // new JoystickButton(driveStick, 6).whenHeld(runUpperHopper, true);
-        new JoystickButton(driveStick, 12).whenHeld(runExtendingArmsHIGH, true);
-        new JoystickButton(driveStick, 11).whenHeld(runExtendingArmsMID, true);
-        new JoystickButton(driveStick, 10).whenHeld(runClimberExtendingArmsCurrent, true);
+        new JoystickButton(driveStick, 10).whenHeld(runExtendingArmsHIGH, true);
+        new JoystickButton(driveStick, 9).whenHeld(runExtendingArmsMID, true);
 
-        new JoystickButton(driveStick, 6).whenHeld(runDrive);
+        // new JoystickButton(driveStick, 6).whenHeld(runDrive);
+        new JoystickButton(driveStick, 12).whenPressed(() -> teleopJoystickDrive.setFieldRelative(false));
+        new JoystickButton(driveStick, 12).whenReleased(() -> teleopJoystickDrive.setFieldRelative(true));
+
+        new JoystickButton(driveStick, 8).whenHeld(runClimberExtendingArmsCurrent, true);
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
@@ -179,9 +184,9 @@ public class RobotContainer {
         config.setReversed(false);
         // An example trajectory to follow. All units in meters.
         List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-                new Pose2d(1.4, 0, Rotation2d.fromDegrees(0)));
+                new Pose2d(1.5, 0, Rotation2d.fromDegrees(0)));
 
-        List<Pose2d> list2 = List.of(new Pose2d(1.4, 0, Rotation2d.fromDegrees(0)),
+        List<Pose2d> list2 = List.of(new Pose2d(1.5, 0, Rotation2d.fromDegrees(0)),
                 new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)));
 
         List<Pose2d> list3 = List.of(new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)),

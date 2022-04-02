@@ -74,10 +74,14 @@ public class Robot extends TimedRobot {
     /** This function is called once each time the robot enters Disabled mode. */
     @Override
     public void disabledInit() {
+        timeBotsRobotContainer.climber.setLeftExtendingArmCurrent(0);
+        timeBotsRobotContainer.climber.setRightExtendingArmCurrent(0);
     }
 
     @Override
     public void disabledPeriodic() {
+        timeBotsRobotContainer.climber.setLeftExtendingArmCurrent(0);
+        timeBotsRobotContainer.climber.setRightExtendingArmCurrent(0);
     }
 
     /**
