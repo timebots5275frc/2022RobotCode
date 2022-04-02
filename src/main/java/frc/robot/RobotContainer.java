@@ -171,6 +171,11 @@ public class RobotContainer {
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(drivetrain.kinematics);
 
+        TrajectoryConfig config2 = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond2,
+                AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
+                        // Add kinematics to ensure max speed is actually obeyed
+                        .setKinematics(drivetrain.kinematics);
+
         config.setReversed(false);
         // An example trajectory to follow. All units in meters.
         List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
@@ -180,13 +185,13 @@ public class RobotContainer {
                 new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)));
 
         List<Pose2d> list3 = List.of(new Pose2d(1.8, 0, Rotation2d.fromDegrees(90)),
-                new Pose2d(2.2, 0, Rotation2d.fromDegrees(180)));
+                new Pose2d(1.4, 0, Rotation2d.fromDegrees(180)));
 
         Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(list, config);
 
         Trajectory exampleTrajectory2 = TrajectoryGenerator.generateTrajectory(list2, config);
 
-        Trajectory exampleTrajectory3 = TrajectoryGenerator.generateTrajectory(list3, config);
+        Trajectory exampleTrajectory3 = TrajectoryGenerator.generateTrajectory(list3, config2);
 
         SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(exampleTrajectory,
                 drivetrain::getPose,
@@ -205,7 +210,11 @@ public class RobotContainer {
                 drivetrain.kinematics,
                 // Position controllers
                 xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
+
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
+
+        drivetrain.resetOdometry();
+        drivetrain.resetPIgeonIMU();
 
         return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3)
                 .andThen(() -> drivetrain.drive(0, 0, 0, false));

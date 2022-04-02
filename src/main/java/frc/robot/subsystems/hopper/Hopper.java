@@ -28,12 +28,12 @@ public class Hopper extends SubsystemBase {
         // This method will be called once per scheduler run
         upperHopperStatus = upperHopperSensor.get();
         lowerHopperStatus = lowerHopperSensor.get();
-        if (upperHopperStatus == false) {
-            System.out.println("Upper Working");
-        }
-        if (lowerHopperStatus == false) {
-            System.out.println("Lower Working");
-        }
+        // if (upperHopperStatus == false) {
+        // System.out.println("Upper Working");
+        // }
+        // if (lowerHopperStatus == false) {
+        // System.out.println("Lower Working");
+        // }
     }
 
     public void runLowerHopper(double percentage) {
