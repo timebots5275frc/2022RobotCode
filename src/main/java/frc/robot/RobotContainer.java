@@ -207,7 +207,8 @@ public class RobotContainer {
                 xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
 
-        return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3);
+        return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3)
+                .andThen(() -> drivetrain.drive(0, 0, 0, false));
 
     }
 }
