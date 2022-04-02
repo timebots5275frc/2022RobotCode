@@ -96,10 +96,10 @@ public class Drivetrain extends SubsystemBase {
         // SmartDashboard.putNumber("LeftFrontSpeedNorm",
         // swerveModuleStates[0].speedMetersPerSecond );
 
-        leftFrontSwerveModule.setDesiredState(swerveModuleStates[0], false);
-        rightFrontSwerveModule.setDesiredState(swerveModuleStates[1], false);
-        rightRearSwerveModule.setDesiredState(swerveModuleStates[2], false);
-        leftRearSwerveModule.setDesiredState(swerveModuleStates[3], false);
+        leftFrontSwerveModule.setDesiredState(swerveModuleStates[0], true, "LF");
+        rightFrontSwerveModule.setDesiredState(swerveModuleStates[1], true, "RF");
+        rightRearSwerveModule.setDesiredState(swerveModuleStates[2], true, "RR");
+        leftRearSwerveModule.setDesiredState(swerveModuleStates[3], true, "LR");
     }
 
     /**
@@ -181,19 +181,19 @@ public class Drivetrain extends SubsystemBase {
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.MAX_DRIVE_SPEED);
 
-        leftFrontSwerveModule.setDesiredState(desiredStates[0], true);
-        rightFrontSwerveModule.setDesiredState(desiredStates[1], false);
-        rightRearSwerveModule.setDesiredState(desiredStates[2], false);
-        leftRearSwerveModule.setDesiredState(desiredStates[3], false);
+        leftFrontSwerveModule.setDesiredState(desiredStates[0], true, "LF");
+        rightFrontSwerveModule.setDesiredState(desiredStates[1], true, "RF");
+        rightRearSwerveModule.setDesiredState(desiredStates[2], true, "RR");
+        leftRearSwerveModule.setDesiredState(desiredStates[3], true, "LR");
     }
 
     public void alignWheels() {
         SwerveModuleState desiredStates = new SwerveModuleState(0, new Rotation2d(0));
 
-        leftFrontSwerveModule.setDesiredState(desiredStates, false);
-        rightFrontSwerveModule.setDesiredState(desiredStates, false);
-        rightRearSwerveModule.setDesiredState(desiredStates, false);
-        leftRearSwerveModule.setDesiredState(desiredStates, false);
+        leftFrontSwerveModule.setDesiredState(desiredStates, true, "LF");
+        rightFrontSwerveModule.setDesiredState(desiredStates, true, "RF");
+        rightRearSwerveModule.setDesiredState(desiredStates, true, "RR");
+        leftRearSwerveModule.setDesiredState(desiredStates, true, "LR");
     }
 
     public static Trajectory generateTrajectory(TrajectoryConfig config, List<Pose2d> list) {

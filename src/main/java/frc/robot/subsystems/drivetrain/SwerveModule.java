@@ -78,7 +78,7 @@ public class SwerveModule {
      *
      * @param desiredState Desired state with speed and angle.
      */
-    public void setDesiredState(SwerveModuleState desiredState, boolean logit) {
+    public void setDesiredState(SwerveModuleState desiredState, boolean logit, String name) {
 
         double curSteerAngleRadians = Math.toRadians(steerAngleEncoder.getAbsolutePosition());
 
@@ -90,12 +90,13 @@ public class SwerveModule {
                 state.angle.getDegrees());
 
         if (logit) {
-            SmartDashboard.putNumber("Drive OutputCurrent", driveMotor.getOutputCurrent());
+            SmartDashboard.putNumber(name + " Drive OutputCurrent", driveMotor.getOutputCurrent());
             // SmartDashboard.putNumber("Drive OutputCurrent", driveMotor.current());
 
-            SmartDashboard.putNumber("steerAngleEncoder.getAbsolutePosition()",
+            SmartDashboard.putNumber(name + " steerAngleEncoder.getAbsolutePosition()",
                     steerAngleEncoder.getAbsolutePosition());
-            SmartDashboard.putNumber("SteerMotorRpmCommand", steerMotorRpm);
+            SmartDashboard.putNumber(name + " SteerMotorRpmCommand", steerMotorRpm);
+            SmartDashboard.putNumber(name + " SteerPIDdegrees", state.angle.getDegrees());
         }
 
         steerMotorVelocityPID.setReference(steerMotorRpm, CANSparkMax.ControlType.kVelocity);
@@ -104,9 +105,9 @@ public class SwerveModule {
 
         if (logit) {
             double driveSpeed = driveNEOMotorEncoder.getVelocity();
-            SmartDashboard.putNumber("DriveSpeedMetersPerSecond", state.speedMetersPerSecond);
-            SmartDashboard.putNumber("DriveMotorRpmCommand", driveMotorRpm);
-            SmartDashboard.putNumber("DriveMotorSpeed", driveSpeed);
+            SmartDashboard.putNumber(name + " DriveSpeedMetersPerSecond", state.speedMetersPerSecond);
+            SmartDashboard.putNumber(name + " DriveMotorRpmCommand", driveMotorRpm);
+            SmartDashboard.putNumber(name + " DriveMotorSpeed", driveSpeed);
         }
 
         driveMotorVelocityPID.setReference(driveMotorRpm, CANSparkMax.ControlType.kVelocity);
