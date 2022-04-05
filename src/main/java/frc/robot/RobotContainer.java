@@ -172,18 +172,18 @@ public class RobotContainer {
      * @return the command to run in autonomous
      */
 
-    public SequentialCommandGroup getAutoCommand() {
+    public Command getAutoCommand() {
         if (autoSelect == 1) {
             return makeSingleShotAutoCommand();
         } else if (autoSelect == 2) {
             return makeTwoShotAutoCommand();
         } else {
-            return makeAutoTaxi();
+            return null;
         }
     }
 
     private SequentialCommandGroup makeTwoShotAutoCommand() {
-        System.out.println("getAutonomousCommand");
+        System.out.println("makeTwoShotAutoCommand");
         // Create config for trajectory
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
@@ -240,11 +240,32 @@ public class RobotContainer {
 
     }
 
+    private Command makeSingleShotAutoCommand() {
+        System.out.println("makeSingleShotAutoCommand");
+        // Create config for trajectory
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+        TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
+                AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
+                        // Add kinematics to ensure max speed is actually obeyed
+                        .setKinematics(drivetrain.kinematics);
 
-    private SequentialCommandGroup makeSingleShotAutoCommand() {
-        return new SequntialCommandGroup();
+        config.setReversed(true);
+
+        // An example trajectory to follow. All units in meters.
+        List<Pose2d> list = List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+                new Pose2d(-1.5, 0, Rotation2d.fromDegrees(0)));
+
+        Trajectory exampleTrajectory = Drivetrain.generateTrajectory(config, list);
+
+        SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(exampleTrajectory,
+                drivetrain::getPose,
+                drivetrain.kinematics,
+                // Position controllers
+                xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
+
+        drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
+
+        return swerveControllerCommand;
     }
-    private SequentialCommandGroup makeAutoTaxi() {
-        return new SequntialCommandGroup();
-    }
+
 }

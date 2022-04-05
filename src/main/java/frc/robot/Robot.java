@@ -26,10 +26,10 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class Robot extends TimedRobot {
     private ParallelCommandGroup Autonomous1_DriveAndIntakeAndHopper;
     private SequentialCommandGroup Autonomous1_DriveThenHopper;
-    private Command Autonomous1_Shooter;
+    // private Command Autonomous1_Shooter;
 
-    private ParallelCommandGroup Autonomous2;
-    private ParallelCommandGroup Autonomous3;
+    // private ParallelCommandGroup Autonomous2;
+    // private ParallelCommandGroup Autonomous3;
 
     private RobotContainer timeBotsRobotContainer;
 
@@ -98,12 +98,15 @@ public class Robot extends TimedRobot {
 
         // Autonomous1_Shooter = timeBotsRobotContainer.autonomousShootCargo;
 
-        Autonomous1_DriveThenHopper = new SequentialCommandGroup(
-                timeBotsRobotContainer.getAutonomousCommand(),
-                timeBotsRobotContainer.autonomousHopperUpperCargo);
+        Command autoDrive = timeBotsRobotContainer.getAutoCommand();
 
         // schedule the autonomous command (example)
-        if (Autonomous1_DriveThenHopper != null) {
+        if (autoDrive != null) {
+
+            Autonomous1_DriveThenHopper = new SequentialCommandGroup(
+                    autoDrive,
+                    timeBotsRobotContainer.autonomousHopperUpperCargo);
+
             Autonomous1_DriveThenHopper.schedule();
             timeBotsRobotContainer.autonomousShootCargo.schedule();
             timeBotsRobotContainer.autonomousIntakeCargo.schedule();
@@ -131,12 +134,13 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (Autonomous1_DriveAndIntakeAndHopper != null) {
+        if (Autonomous1_DriveThenHopper != null) {
+            CommandScheduler.getInstance().cancelAll();
 
-            Autonomous1_DriveThenHopper.cancel();
-            timeBotsRobotContainer.autonomousShootCargo.cancel();
-            timeBotsRobotContainer.autonomousIntakeCargo.cancel();
-            timeBotsRobotContainer.autonomousHopperLowerCargo.cancel();
+            // Autonomous1_DriveThenHopper.cancel();
+            // timeBotsRobotContainer.autonomousShootCargo.cancel();
+            // timeBotsRobotContainer.autonomousIntakeCargo.cancel();
+            // timeBotsRobotContainer.autonomousHopperLowerCargo.cancel();
         }
     }
 
