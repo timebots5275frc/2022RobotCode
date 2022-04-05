@@ -1,5 +1,5 @@
 
-# FRC Team T.I.M.E Bots #5275 - 2021-2022 Robot Code - INFINITE RECHARGE
+# FRC Team T.I.M.E Bots #5275 - 2021-2022 Robot Code
 Contact Us: [our website](https://www.timebots5275.com) | [email](mailto:team@timebots5275.com)  
  <img src="readmeimages/robot.jpg" alt="Robot image" width="60%"/>
 
