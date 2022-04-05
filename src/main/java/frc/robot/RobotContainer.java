@@ -111,6 +111,7 @@ public class RobotContainer {
     private RunShooter runShooterUpperClimber3 = new RunShooter(shooter, 5000, auxStick);
 
     private RunDrive runDrive = new RunDrive(drivetrain);
+    public int autoSelect = 0;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -155,6 +156,9 @@ public class RobotContainer {
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
+        new JoystickButton(auxStick, 11).whenPressed(() -> autoSelect = 1);
+        new JoystickButton(auxStick, 12).whenPressed(() -> autoSelect = 2);
+
     }
 
     public PIDController xController = new PIDController(Constants.AutoConstants.kPXController, 0, 0);
@@ -167,7 +171,18 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
-    public SequentialCommandGroup getAutonomousCommand() {
+
+    public SequentialCommandGroup getAutoCommand() {
+        if (autoSelect == 1) {
+            return makeSingleShotAutoCommand();
+        } else if (autoSelect == 2) {
+            return makeTwoShotAutoCommand();
+        } else {
+            return makeAutoTaxi();
+        }
+    }
+
+    private SequentialCommandGroup makeTwoShotAutoCommand() {
         System.out.println("getAutonomousCommand");
         // Create config for trajectory
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
@@ -220,9 +235,16 @@ public class RobotContainer {
 
         drivetrain.resetOdometry();
         drivetrain.resetPIgeonIMU();
-
         return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3)
                 .andThen(() -> drivetrain.drive(0, 0, 0, false));
 
+    }
+
+
+    private SequentialCommandGroup makeSingleShotAutoCommand() {
+        return new SequntialCommandGroup();
+    }
+    private SequentialCommandGroup makeAutoTaxi() {
+        return new SequntialCommandGroup();
     }
 }
