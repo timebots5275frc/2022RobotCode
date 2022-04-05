@@ -1,10 +1,10 @@
 
 # FRC Team T.I.M.E Bots #5275 - 2021-2022 Robot Code - INFINITE RECHARGE
 Contact Us: [our website](https://www.timebots5275.com) | [email](mailto:team@timebots5275.com)  
- <img src="readmeimages/robot.png" alt="Robot image" width="60%"/>
+ <img src="readmeimages/robot.jpg" alt="Robot image" width="60%"/>
 
 ## Robot Information  
-Name: Unknown  
+Name: Krónos  
 Year: 2021-2022  
 Team: T.I.M.E Bots 5275  
 
