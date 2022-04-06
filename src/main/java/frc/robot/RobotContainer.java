@@ -156,8 +156,18 @@ public class RobotContainer {
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
-        new JoystickButton(auxStick, 11).whenPressed(() -> autoSelect = 1);
-        new JoystickButton(auxStick, 12).whenPressed(() -> autoSelect = 2);
+        // new JoystickButton(auxStick, 11).whenPressed(() -> );
+        // new JoystickButton(auxStick, 12).whenPressed(() -> setAutoSelect(2));
+
+    }
+
+    public void checkButtons() {
+        if (auxStick.getRawButtonPressed(11)) {
+            setAutoSelect(1);
+        }
+        if (auxStick.getRawButtonPressed(12)) {
+            setAutoSelect(2);
+        }
 
     }
 
@@ -171,6 +181,11 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
+
+    public void setAutoSelect(int num) {
+        autoSelect = num;
+        System.out.println("Set Auto to: " + num);
+    }
 
     public Command getAutoCommand() {
         if (autoSelect == 1) {
@@ -186,6 +201,7 @@ public class RobotContainer {
         System.out.println("makeTwoShotAutoCommand");
         // Create config for trajectory
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
                 AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
                         // Add kinematics to ensure max speed is actually obeyed
@@ -231,10 +247,10 @@ public class RobotContainer {
                 // Position controllers
                 xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
 
+        drivetrain.resetPIgeonIMU();
+
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
 
-        drivetrain.resetOdometry();
-        drivetrain.resetPIgeonIMU();
         return new SequentialCommandGroup(swerveControllerCommand, swerveControllerCommand2, swerveControllerCommand3)
                 .andThen(() -> drivetrain.drive(0, 0, 0, false));
 
@@ -244,6 +260,7 @@ public class RobotContainer {
         System.out.println("makeSingleShotAutoCommand");
         // Create config for trajectory
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
         TrajectoryConfig config = new TrajectoryConfig(AutoConstants.MAX_Speed_MetersPerSecond,
                 AutoConstants.MAX_Acceleration_MetersPerSecondSquared)
                         // Add kinematics to ensure max speed is actually obeyed
@@ -263,9 +280,11 @@ public class RobotContainer {
                 // Position controllers
                 xController, yController, thetaController, drivetrain::setModuleStates, drivetrain);
 
+        drivetrain.resetPIgeonIMU();
+
         drivetrain.resetOdometryWithPose2d(exampleTrajectory.getInitialPose());
 
-        return swerveControllerCommand;
+        return swerveControllerCommand.andThen(() -> drivetrain.drive(0, 0, 0, false));
     }
 
 }

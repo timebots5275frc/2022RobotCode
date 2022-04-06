@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.autonomous.AutonomousHopperUpper;
+import frc.robot.constants.Constants;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -69,6 +71,7 @@ public class Robot extends TimedRobot {
         // robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        timeBotsRobotContainer.checkButtons();
     }
 
     /** This function is called once each time the robot enters Disabled mode. */
@@ -76,6 +79,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         timeBotsRobotContainer.climber.setLeftExtendingArmCurrent(0);
         timeBotsRobotContainer.climber.setRightExtendingArmCurrent(0);
+        CommandScheduler.getInstance().cancelAll();
     }
 
     @Override
@@ -90,6 +94,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
+        CommandScheduler.getInstance().cancelAll();
 
         // Autonomous1_DriveAndIntakeAndHopper = new
         // ParallelCommandGroup(timeBotsRobotContainer.getAutonomousCommand(),
@@ -105,7 +110,8 @@ public class Robot extends TimedRobot {
 
             Autonomous1_DriveThenHopper = new SequentialCommandGroup(
                     autoDrive,
-                    timeBotsRobotContainer.autonomousHopperUpperCargo);
+                    new AutonomousHopperUpper(timeBotsRobotContainer.hopper,
+                            Constants.HopperConstants.HOPPER_FIRE_SPEED));
 
             Autonomous1_DriveThenHopper.schedule();
             timeBotsRobotContainer.autonomousShootCargo.schedule();
