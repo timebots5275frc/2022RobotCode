@@ -159,6 +159,10 @@ public class RobotContainer {
         // new JoystickButton(auxStick, 11).whenPressed(() -> );
         // new JoystickButton(auxStick, 12).whenPressed(() -> setAutoSelect(2));
 
+        // new JoystickButton(auxStick, 4).whileHeld(runLowerHopper);
+        new JoystickButton(auxStick, 6).whileHeld(runUpperHopperBackwards);
+        // new JoystickButton(auxStick, 3).whileHeld(runIntake);
+
     }
 
     public void checkButtons() {

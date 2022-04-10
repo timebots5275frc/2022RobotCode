@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.autonomous.AutonomousHopperLower;
 import frc.robot.commands.autonomous.AutonomousHopperUpper;
 import frc.robot.constants.Constants;
 
@@ -111,12 +112,14 @@ public class Robot extends TimedRobot {
             Autonomous1_DriveThenHopper = new SequentialCommandGroup(
                     autoDrive,
                     new AutonomousHopperUpper(timeBotsRobotContainer.hopper,
-                            Constants.HopperConstants.HOPPER_FIRE_SPEED));
+                            Constants.HopperConstants.HOPPER_FIRE_SPEED)
+                                    .alongWith(new AutonomousHopperLower(timeBotsRobotContainer.hopper,
+                                            Constants.HopperConstants.HOPPER_FIRE_SPEED)));
 
             Autonomous1_DriveThenHopper.schedule();
             timeBotsRobotContainer.autonomousShootCargo.schedule();
             timeBotsRobotContainer.autonomousIntakeCargo.schedule();
-            timeBotsRobotContainer.autonomousHopperLowerCargo.schedule();
+            // timeBotsRobotContainer.autonomousHopperLowerCargo.schedule();
         }
     }
 
