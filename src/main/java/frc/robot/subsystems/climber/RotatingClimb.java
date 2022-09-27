@@ -61,6 +61,27 @@ public class RotatingClimb extends SubsystemBase {
         // robit
     }
 
+    public void setRotatingArmPosition(double setPosition) {
+
+        double limitedSetPosition = setPosition;
+
+        if (setPosition > Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MAX_LIMIT;
+        } else if (setPosition < Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT) {
+            limitedSetPosition = Constants.ClimberConstants.EXTENDING_CLIMBER_MIN_LIMIT;
+        }
+
+        rotatingSparkMaxPIDController.setReference(limitedSetPosition, ControlType.kSmartMotion, 0);
+    }
+
+    public void setLrotatingArmCurrent(double setCurrent) {
+        rotatingSparkMaxPIDController.setReference(setCurrent, ControlType.kCurrent, 1);
+    }
+
+    public void resetLrotatingExtendingArm() {
+        rotatingSparkMax.getEncoder().setPosition(0);
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
