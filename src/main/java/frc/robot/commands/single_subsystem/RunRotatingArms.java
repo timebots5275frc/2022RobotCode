@@ -4,29 +4,34 @@
 
 package frc.robot.commands.single_subsystem;
 
+import javax.swing.text.Position;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.climber.RotatingClimb;
 
-public class ResetRotatingArms extends CommandBase {
+public class RunRotatingArms extends CommandBase {
     /** Creates a new RunRotatingArmsForward. */
     private RotatingClimb rotatingArms;
-    private double speed;
+    private double position;
 
-    public ResetRotatingArms(RotatingClimb _rotatingArms, double _speed) {
+    public RunRotatingArms(RotatingClimb _rotatingArms, double _position) {
         // Use addRequirements() here to declare subsystem dependencies.
         rotatingArms = _rotatingArms;
-        speed = _speed;
+        position = _position;
+        addRequirements(rotatingArms);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        rotatingArms.getCurrentArmPosition();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        rotatingArms.resetRotatingArm(speed);
+        System.out.println("Command running ");
+        rotatingArms.moveRotArms(position);
     }
 
     // Called once the command ends or is interrupted.
