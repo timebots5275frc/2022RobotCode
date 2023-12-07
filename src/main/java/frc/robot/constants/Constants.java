@@ -150,7 +150,6 @@ public class Constants {
     public static final class ClimberConstants {
 
         public static final double CLIMBER_EXTENDING_ARM_MOTOR_RPM = 2160;
-        public static final double ROTATING_CLIMBER_MOTOR_RPM = 50;
         public static final double ROTATING_RESET_CLIMBER_MOTOR_RPM = 50;
         public static final int LEFT_EXTENDING_CLIMBER_MOTOR_ID = 40;
         public static final int RIGHT_EXTENDING_CLIMBER_MOTOR_ID = 41;
@@ -158,8 +157,11 @@ public class Constants {
         public static final float EXTENDING_CLIMBER_MAX_LIMIT = 320;
         public static final double EXTENDING_CLIMBER_MIN_LIMIT = 0;
         public static final int ROTATING_CLIMBER_ENCODER_ID = 43;
-        public static final double ROTATING_CLIMBER_FORWARD_LIMIT = 5;
-        public static final double ROTATING_CLIMBER_BACKWARD_LIMIT = -5;
+        public static final double ROTATING_CLIMBER_FORWARD_LIMIT = 10;
+        public static final double ROTATING_CLIMBER_BACKWARD_LIMIT = -10;
+        public static final double ROTATONG_ARMS_ROTATION_PER_DEGREE = 300.0 / 360.0;
+        public static final double ROTATING_ARMS_FORWARD_POSITION = 5 * ROTATONG_ARMS_ROTATION_PER_DEGREE;
+        public static final double ROTATING_ARMS_BACKWARD_POSITION = -5 * ROTATONG_ARMS_ROTATION_PER_DEGREE;
     }
 
     /**

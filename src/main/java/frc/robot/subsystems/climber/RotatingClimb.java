@@ -38,25 +38,31 @@ public class RotatingClimb extends SubsystemBase {
         angleEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
         // PID coefficients
-        ra_kP = 0.0004;
+        ra_kP = 0.00016;
         ra_kI = 0;
         ra_kD = 0;
         ra_kIz = 0;
-        ra_kFF = 0.00017; // .000015
-        ra_kMaxOutput = 1;
-        ra_kMinOutput = -1;
+        ra_kFF = 0.0;
+        ra_kMaxOutput = .75;
+        ra_kMinOutput = -.75;
+        ra_smartMAXVelocity = 50;
+        ra_smartMAXAcc = 100;
+        ra_allowedErr = 2;
 
-        // set PID coefficients shooterRight
-        rotatingSparkMaxPIDController.setP(ra_kP);
-        rotatingSparkMaxPIDController.setI(ra_kI);
-        rotatingSparkMaxPIDController.setD(ra_kD);
-        rotatingSparkMaxPIDController.setIZone(ra_kIz);
-        rotatingSparkMaxPIDController.setFF(ra_kFF);
-        rotatingSparkMaxPIDController.setOutputRange(ra_kMinOutput, ra_kMaxOutput);
-
+        rotatingSparkMaxPIDController.setP(ra_kP, 0);
+        rotatingSparkMaxPIDController.setI(ra_kI, 0);
+        rotatingSparkMaxPIDController.setD(ra_kD, 0);
+        rotatingSparkMaxPIDController.setIZone(ra_kIz, 0);
+        rotatingSparkMaxPIDController.setFF(ra_kFF, 0);
+        rotatingSparkMaxPIDController.setOutputRange(ra_kMinOutput, ra_kMaxOutput, 0);
+        rotatingSparkMaxPIDController.setSmartMotionMaxVelocity(ra_smartMAXVelocity, 0);
+        rotatingSparkMaxPIDController.setSmartMotionMaxAccel(ra_smartMAXAcc, 0);
+        rotatingSparkMaxPIDController.setSmartMotionAllowedClosedLoopError(ra_allowedErr, 0);
+        rotatingSparkMaxPIDController.setSmartMotionMinOutputVelocity(10, 0);
         // robit
     }
 
+<<<<<<< HEAD
     public void moveRotArmsForward(double speed) {
         if (currentAngle < Constants.ClimberConstants.ROTATING_CLIMBER_FORWARD_LIMIT) {
             rotatingSparkMaxPIDController.setReference(-speed, ControlType.kVelocity);
@@ -82,6 +88,18 @@ public class RotatingClimb extends SubsystemBase {
         if (currentAngle > 0.5) {
             rotatingSparkMaxPIDController.setReference(-speed, ControlType.kVelocity);
         }
+=======
+    public void moveRotArms(double setPosition) {
+
+        double limitedSetPosition = setPosition;
+        rotatingSparkMaxPIDController.setReference(limitedSetPosition, ControlType.kSmartMotion, 0);
+
+    }
+
+    public void getCurrentArmPosition() {
+        rotatingSparkMax.getEncoder()
+                .setPosition(Constants.ClimberConstants.ROTATONG_ARMS_ROTATION_PER_DEGREE * currentAngle);
+>>>>>>> 2a8fd1feb6aa6428619a0f47ca46c062eed3a61d
     }
 
     public void stop() {
@@ -95,3 +113,4 @@ public class RotatingClimb extends SubsystemBase {
 
     }
 }
+// ! robit
