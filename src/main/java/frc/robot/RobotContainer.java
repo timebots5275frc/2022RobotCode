@@ -164,7 +164,7 @@ public class RobotContainer {
         new JoystickButton(driveStick, 12).whenReleased(() -> teleopJoystickDrive.setFieldRelative(true));
 
         new JoystickButton(driveStick, 8).whenHeld(runClimberExtendingArmsCurrent, true);
-        new JoystickButton(driveStick, 8).whenHeld(resetRotatingArms, true); // ! Might want to change to -12 degrees
+        // new JoystickButton(driveStick, 8).whenHeld(resetRotatingArms, true); // ! Might want to change to -12 degrees
 
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetPIgeonIMU());
         new JoystickButton(driveStick, 7).whenPressed(() -> drivetrain.resetOdometry());
@@ -172,9 +172,9 @@ public class RobotContainer {
         // new JoystickButton(auxStick, 12).whenPressed(() -> setAutoSelect(2));
 
         // new JoystickButton(auxStick, 4).whileHeld(runLowerHopper);
-        new JoystickButton(auxStick, 6).whileHeld(runUpperHopperBackwards);
-        new JoystickButton(auxStick, 11).whenPressed(runRotatingArmsForward, true);
-        new JoystickButton(auxStick, 12).whenPressed(runRotatingArmsBackward, true);
+        // new JoystickButton(auxStick, 6).whileHeld(runUpperHopperBackwards);
+        // new JoystickButton(auxStick, 11).whileHeld(runRotatingArmsForward, true);
+        // new JoystickButton(auxStick, 12).whileHeld(runRotatingArmsBackward, true);
         // new JoystickButton(auxStick, 3).whileHeld(runIntake);
 
     }

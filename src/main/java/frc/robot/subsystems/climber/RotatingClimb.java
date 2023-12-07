@@ -60,6 +60,8 @@ public class RotatingClimb extends SubsystemBase {
     public void moveRotArmsForward(double speed) {
         if (currentAngle < Constants.ClimberConstants.ROTATING_CLIMBER_FORWARD_LIMIT) {
             rotatingSparkMaxPIDController.setReference(-speed, ControlType.kVelocity);
+        } else if (currentAngle >= Constants.ClimberConstants.ROTATING_CLIMBER_FORWARD_LIMIT) {
+            rotatingSparkMaxPIDController.setReference(0, ControlType.kVelocity);
         }
 
     }
@@ -67,6 +69,8 @@ public class RotatingClimb extends SubsystemBase {
     public void moveRotArmsBackward(double speed) {
         if (currentAngle > Constants.ClimberConstants.ROTATING_CLIMBER_BACKWARD_LIMIT) {
             rotatingSparkMaxPIDController.setReference(speed, ControlType.kVelocity);
+        } else if (currentAngle <= Constants.ClimberConstants.ROTATING_CLIMBER_BACKWARD_LIMIT) {
+            rotatingSparkMaxPIDController.setReference(0, ControlType.kVelocity);
         }
     }
 
@@ -80,9 +84,14 @@ public class RotatingClimb extends SubsystemBase {
         }
     }
 
+    public void stop() {
+        rotatingSparkMaxPIDController.setReference(0, ControlType.kVelocity);
+    }
+
     @Override
     public void periodic() {
         currentAngle = angleEncoder.getAbsolutePosition();
         // This method will be called once per scheduler run
+
     }
 }
