@@ -1,7 +1,7 @@
 
 # FRC Team T.I.M.E Bots #5275 - 2021-2022 Robot Code
 Contact Us: [our website](https://www.timebots5275.com) | [email](mailto:team@timebots5275.com)  
- <img src="readmeimages/robot.png" alt="Robot image" width="60%"/>
+ <img src="readmeimages/20220402_141242.jpg" alt="Robot image" width="60%"/>
 
 ## Robot Information  
 Name: Krónos  
